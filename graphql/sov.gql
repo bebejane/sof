@@ -1,0 +1,192 @@
+query ValuedDirection {
+	sovValuedDirection {
+		id
+		intro
+		text
+		input {
+			__typename
+			... on SovInputTextRecord {
+				...TextInputFragment
+			}
+		}
+		image {
+			...MediaFragment
+		}
+	}
+}
+
+query TakeCareOfYourself {
+	sovTakeCareOfMyself {
+		id
+		intro
+		inputs {
+			__typename
+			... on SovInputTextRecord {
+				...TextInputFragment
+			}
+		}
+	}
+}
+
+query HomeAssignment {
+	sovHomeAssignment {
+		id
+		intro
+		inputs {
+			__typename
+			... on SovInputTextRecord {
+				...TextInputFragment
+			}
+			... on SovInputDateRecord {
+				...DateInputFragment
+			}
+		}
+	}
+}
+
+query AssessViolence {
+	sovAssessViolence {
+		id
+		intro
+		sinceLastSession {
+			...SliderInputFragment
+		}
+		otherProblems {
+			...SliderInputFragment
+		}
+	}
+}
+
+query Sork {
+	sovSork {
+		id
+		inputs {
+			__typename
+			... on SovInputTextRecord {
+				...TextInputFragment
+			}
+			... on SovInputSliderRecord {
+				...SliderInputFragment
+			}
+		}
+	}
+}
+
+query SoundExercise {
+	sovSoundExercise {
+		id
+		intro
+		exercises {
+			id
+			title
+			file {
+				filename
+				url
+			}
+			youtube {
+				thumbnailUrl
+				url
+				title
+				providerUid
+				provider
+			}
+		}
+	}
+}
+
+query MaintanencePlan {
+	sovMaintanencePlan {
+		intro(markdown: false)
+		inputs {
+			...TextInputFragment
+		}
+	}
+}
+
+query StopAndThinkSteps {
+	sovStopAndThink {
+		id
+	}
+	allSovStopAndThinkTools {
+		...StopAndThinkToolFragment
+	}
+}
+
+query StopAndThinkTool($id: ItemId) {
+	sovStopAndThinkTool(filter: { id: { eq: $id } }) {
+		...StopAndThinkToolFragment
+	}
+}
+
+query EmotionalDiary {
+	sovEmotionalDiary {
+		id
+		inputs {
+			__typename
+			... on SovInputTextRecord {
+				...TextInputFragment
+			}
+			... on SovInputSliderRecord {
+				...SliderInputFragment
+			}
+		}
+	}
+}
+
+fragment StopAndThinkToolFragment on SovStopAndThinkToolRecord {
+	id
+	title
+	description
+	content {
+		value
+		links
+		blocks {
+			__typename
+			... on ImageBlockRecord {
+				id
+				image {
+					...MediaFragment
+				}
+			}
+			... on AudioBlockRecord {
+				id
+				audio {
+					url
+				}
+			}
+			... on TextInputBlockRecord {
+				id
+				input {
+					...TextInputFragment
+				}
+			}
+			... on TableBlockRecord {
+				id
+				tableData
+			}
+		}
+	}
+}
+
+fragment TextInputFragment on SovInputTextRecord {
+	id
+	label
+	text
+	slug
+}
+
+fragment DateInputFragment on SovInputDateRecord {
+	id
+	label
+	text
+	slug
+}
+
+fragment SliderInputFragment on SovInputSliderRecord {
+	id
+	label
+	text
+	slug
+	min
+	max
+}
