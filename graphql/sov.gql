@@ -1,11 +1,11 @@
 query ValuedDirection {
-	sovValuedDirection {
+	sofValuedDirection {
 		id
 		intro
 		text
 		input {
 			__typename
-			... on SovInputTextRecord {
+			... on SofInputTextRecord {
 				...TextInputFragment
 			}
 		}
@@ -16,12 +16,12 @@ query ValuedDirection {
 }
 
 query TakeCareOfYourself {
-	sovTakeCareOfMyself {
+	sofTakeCareOfMyself {
 		id
 		intro
 		inputs {
 			__typename
-			... on SovInputTextRecord {
+			... on SofInputTextRecord {
 				...TextInputFragment
 			}
 		}
@@ -29,15 +29,15 @@ query TakeCareOfYourself {
 }
 
 query HomeAssignment {
-	sovHomeAssignment {
+	sofHomeAssignment {
 		id
 		intro
 		inputs {
 			__typename
-			... on SovInputTextRecord {
+			... on SofInputTextRecord {
 				...TextInputFragment
 			}
-			... on SovInputDateRecord {
+			... on SofInputDateRecord {
 				...DateInputFragment
 			}
 		}
@@ -45,7 +45,7 @@ query HomeAssignment {
 }
 
 query AssessViolence {
-	sovAssessViolence {
+	sofAssessViolence {
 		id
 		intro
 		sinceLastSession {
@@ -58,14 +58,14 @@ query AssessViolence {
 }
 
 query Sork {
-	sovSork {
+	sofSork {
 		id
 		inputs {
 			__typename
-			... on SovInputTextRecord {
+			... on SofInputTextRecord {
 				...TextInputFragment
 			}
-			... on SovInputSliderRecord {
+			... on SofInputSliderRecord {
 				...SliderInputFragment
 			}
 		}
@@ -73,7 +73,7 @@ query Sork {
 }
 
 query SoundExercise {
-	sovSoundExercise {
+	sofSoundExercise {
 		id
 		intro
 		exercises {
@@ -95,7 +95,7 @@ query SoundExercise {
 }
 
 query MaintanencePlan {
-	sovMaintanencePlan {
+	sofMaintanencePlan {
 		intro(markdown: false)
 		inputs {
 			...TextInputFragment
@@ -104,36 +104,36 @@ query MaintanencePlan {
 }
 
 query StopAndThinkSteps {
-	sovStopAndThink {
+	sofStopAndThink {
 		id
 	}
-	allSovStopAndThinkTools {
+	allSofStopAndThinkTools {
 		...StopAndThinkToolFragment
 	}
 }
 
 query StopAndThinkTool($id: ItemId) {
-	sovStopAndThinkTool(filter: { id: { eq: $id } }) {
+	sofStopAndThinkTool(filter: { id: { eq: $id } }) {
 		...StopAndThinkToolFragment
 	}
 }
 
 query EmotionalDiary {
-	sovEmotionalDiary {
+	sofEmotionalDiary {
 		id
 		inputs {
 			__typename
-			... on SovInputTextRecord {
+			... on SofInputTextRecord {
 				...TextInputFragment
 			}
-			... on SovInputSliderRecord {
+			... on SofInputSliderRecord {
 				...SliderInputFragment
 			}
 		}
 	}
 }
 
-fragment StopAndThinkToolFragment on SovStopAndThinkToolRecord {
+fragment StopAndThinkToolFragment on SofStopAndThinkToolRecord {
 	id
 	title
 	description
@@ -154,7 +154,7 @@ fragment StopAndThinkToolFragment on SovStopAndThinkToolRecord {
 					url
 				}
 			}
-			... on TextInputBlockRecord {
+			... on TextInputBlockSofRecord {
 				id
 				input {
 					...TextInputFragment
@@ -168,21 +168,21 @@ fragment StopAndThinkToolFragment on SovStopAndThinkToolRecord {
 	}
 }
 
-fragment TextInputFragment on SovInputTextRecord {
+fragment TextInputFragment on SofInputTextRecord {
 	id
 	label
 	text
 	slug
 }
 
-fragment DateInputFragment on SovInputDateRecord {
+fragment DateInputFragment on SofInputDateRecord {
 	id
 	label
 	text
 	slug
 }
 
-fragment SliderInputFragment on SovInputSliderRecord {
+fragment SliderInputFragment on SofInputSliderRecord {
 	id
 	label
 	text

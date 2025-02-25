@@ -28,7 +28,7 @@ export const menu: Menu = [
 		href: '/',
 		name: 'index',
 		options: {
-			title: 'Samtal om Fritid',
+			title: 'Samtal om Frihet',
 			drawerLabel: 'Hem',
 		},
 	},

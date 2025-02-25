@@ -1,11 +1,11 @@
-import "react-native-get-random-values";
-import { nanoid } from "nanoid";
-import { PageView, Loader, TextInput, Button, DatePicker, Spacer, List } from "@/components/ui";
-import { useQuery } from "@/lib/client";
-import { HomeAssignmentDocument } from "@/graphql";
-import useStore from "@/lib/store";
-import { useNavigation, useRouter, useSegments } from "expo-router";
-import { useEffect } from "react";
+import 'react-native-get-random-values';
+import { nanoid } from 'nanoid';
+import { PageView, Loader, TextInput, Button, DatePicker, Spacer, List } from '@/components/ui';
+import { useQuery } from '@/lib/client';
+import { HomeAssignmentDocument } from '@/graphql';
+import useStore from '@/lib/store';
+import { useNavigation, useRouter, useSegments } from 'expo-router';
+import { useEffect } from 'react';
 
 export default function HomeAssignment() {
 	const [section] = useSegments();
@@ -19,28 +19,21 @@ export default function HomeAssignment() {
 		navigation.setOptions({ headerShown: false });
 	}, [data]);
 
-	if (loading || error)
-		return (
-			<Loader
-				loading={loading}
-				error={error}
-				onRetry={retry}
-			/>
-		);
+	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
 
-	const { sovHomeAssignment } = data;
+	const { sofHomeAssignment } = data;
 
 	const isValidItem = () => {
 		const currentItem: { [key: string]: string | number } = {};
 
-		sovHomeAssignment?.inputs.forEach((item) => {
+		sofHomeAssignment?.inputs.forEach((item) => {
 			currentItem[item.slug] = storeData[section]?.[item.slug];
 		});
 
 		let valid = true;
 
 		Object.keys(currentItem).forEach((key) => {
-			if (currentItem[key] === undefined || currentItem[key] === null || currentItem[key] === "") {
+			if (currentItem[key] === undefined || currentItem[key] === null || currentItem[key] === '') {
 				valid = false;
 				return;
 			}
@@ -55,7 +48,7 @@ export default function HomeAssignment() {
 			date: new Date().toString(),
 		};
 
-		sovHomeAssignment?.inputs.forEach((item) => {
+		sofHomeAssignment?.inputs.forEach((item) => {
 			currentItem[item.slug] = storeData[section]?.[item.slug];
 		});
 
@@ -63,34 +56,22 @@ export default function HomeAssignment() {
 			new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1
 		);
 
-		const resetFields = sovHomeAssignment?.inputs.map((item) => item.slug) as string[];
-		updateData(ass, "assignments");
+		const resetFields = sofHomeAssignment?.inputs.map((item) => item.slug) as string[];
+		updateData(ass, 'assignments');
 		resetKeys(resetFields, section);
 	};
 
 	return (
 		<>
 			<PageView>
-				{sovHomeAssignment?.inputs.map((item) =>
-					item.__typename === "SovInputTextRecord" ? (
-						<TextInput
-							key={item.id}
-							slug={item.slug}
-							label={item.label}
-						/>
+				{sofHomeAssignment?.inputs.map((item) =>
+					item.__typename === 'SofInputTextRecord' ? (
+						<TextInput key={item.id} slug={item.slug} label={item.label} />
 					) : (
-						<DatePicker
-							key={item.id}
-							id={item.id}
-							label={item.label}
-							slug={item.slug}
-						/>
+						<DatePicker key={item.id} id={item.id} label={item.label} slug={item.slug} />
 					)
 				)}
-				<Button
-					disabled={!isValidItem()}
-					onPress={save}
-				>
+				<Button disabled={!isValidItem()} onPress={save}>
 					Spara
 				</Button>
 				<Spacer />
@@ -98,7 +79,7 @@ export default function HomeAssignment() {
 					onPress={(id) => router.navigate(`/home-assignment/${id}`)}
 					title='Sparade Hemuppgifter'
 					emptyText='Det finns inga hemuppgifter sparade...'
-					items={assignments?.map(({ id, date, "vad-ska-jag-gora": label }) => ({
+					items={assignments?.map(({ id, date, 'vad-ska-jag-gora': label }) => ({
 						id,
 						date,
 						label,

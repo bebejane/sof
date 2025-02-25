@@ -1,19 +1,19 @@
-import { Loader, Text } from "@/components/ui";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useQuery } from "@/lib/client";
-import { StopAndThinkStepsDocument } from "@/graphql";
-import Theme from "@/styles/theme";
-import { useNavigation, useRouter } from "expo-router";
-import useStore from "../../lib/store";
-import { useEffect, useRef } from "react";
-import { SwipeListView } from "react-native-swipe-list-view";
-import { LinearGradient } from "expo-linear-gradient";
+import { Loader, Text } from '@/components/ui';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { useQuery } from '@/lib/client';
+import { StopAndThinkStepsDocument } from '@/graphql';
+import Theme from '@/styles/theme';
+import { useNavigation, useRouter } from 'expo-router';
+import useStore from '../../lib/store';
+import { useEffect, useRef } from 'react';
+import { SwipeListView } from 'react-native-swipe-list-view';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const NUM_STEPS = 6;
 export const defaultSteps = new Array(NUM_STEPS).fill(null);
 
 type Step = {
-	tool: StopAndThinkStepsQuery["allSovStopAndThinkTools"][0];
+	tool: StopAndThinkStepsQuery['allSofStopAndThinkTools'][0];
 };
 
 export default function StopAndThink() {
@@ -30,16 +30,9 @@ export default function StopAndThink() {
 		navigation.setOptions({ headerShown: false });
 	}, [data]);
 
-	if (loading || error)
-		return (
-			<Loader
-				loading={loading}
-				error={error}
-				onRetry={retry}
-			/>
-		);
+	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
 
-	const { allSovStopAndThinkTools: tools } = data;
+	const { allSofStopAndThinkTools: tools } = data;
 
 	return (
 		<View style={s.container}>
@@ -55,14 +48,7 @@ export default function StopAndThink() {
 				rightOpenValue={-1 * (s.removeButton.width as number)}
 				renderItem={({ item, index }) => {
 					const tool = tools.find((t) => t.id === item.id);
-					return (
-						<Step
-							key={index}
-							toolId={tool?.id}
-							step={index}
-							label={tool?.title}
-						/>
-					);
+					return <Step key={index} toolId={tool?.id} step={index} label={tool?.title} />;
 				}}
 				renderHiddenItem={(data: any, rowMap: any) => {
 					return (
@@ -114,43 +100,43 @@ const Step = ({ toolId, step, label }: StepProps) => {
 				router.navigate(toolId ? `/stop-and-think/tool/${toolId}` : `/stop-and-think/step/${step}`)
 			}
 		>
-			<Text style={[s.stepText, enabled && s.stepTextEnabled]}>{label ?? "+"}</Text>
+			<Text style={[s.stepText, enabled && s.stepTextEnabled]}>{label ?? '+'}</Text>
 		</TouchableOpacity>
 	);
 };
 
 const s = StyleSheet.create({
 	container: {
-		position: "relative",
-		display: "flex",
+		position: 'relative',
+		display: 'flex',
 		flex: 1,
-		alignItems: "flex-start",
-		height: "100%",
+		alignItems: 'flex-start',
+		height: '100%',
 	},
 	steps: {
-		position: "absolute",
+		position: 'absolute',
 		left: 0,
 		top: 0,
-		width: "100%",
-		height: "100%",
-		display: "flex",
+		width: '100%',
+		height: '100%',
+		display: 'flex',
 		flex: 1,
-		flexDirection: "column",
+		flexDirection: 'column',
 		padding: Theme.padding,
 		marginBottom: Theme.padding * 2,
 		marginTop: Theme.padding * 2,
 		zIndex: 2,
 	},
 	stepsContent: {
-		height: "100%",
+		height: '100%',
 	},
 	step: {
-		display: "flex",
+		display: 'flex',
 		flex: 1,
 		flexBasis: `${80 / defaultSteps.length}%`,
-		alignItems: "center",
-		justifyContent: "center",
-		width: "100%",
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: '100%',
 		color: Theme.color.white,
 		borderRadius: Theme.borderRadius,
 		backgroundColor: Theme.color.lightGreen,
@@ -163,8 +149,8 @@ const s = StyleSheet.create({
 	},
 	enabled: {
 		backgroundColor: Theme.color.green,
-		alignItems: "flex-start",
-		justifyContent: "flex-start",
+		alignItems: 'flex-start',
+		justifyContent: 'flex-start',
 	},
 	stepText: {
 		color: Theme.color.green,
@@ -175,18 +161,18 @@ const s = StyleSheet.create({
 	},
 	remove: {
 		flex: 1,
-		display: "flex",
-		flexDirection: "row",
-		justifyContent: "flex-end",
-		width: "100%",
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+		width: '100%',
 		padding: 0,
 		borderColor: Theme.color.green,
 	},
 	removeButton: {
-		display: "flex",
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "center",
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
 		backgroundColor: Theme.color.lightGreen,
 		padding: 0,
 		width: 100,
@@ -198,21 +184,21 @@ const s = StyleSheet.create({
 		color: Theme.color.black,
 	},
 	back: {
-		position: "absolute",
-		display: "flex",
-		flexDirection: "row",
-		justifyContent: "space-between",
+		position: 'absolute',
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
 		top: 0,
 		left: 0,
-		width: "100%",
-		height: "100%",
+		width: '100%',
+		height: '100%',
 		zIndex: 0,
 	},
 	bar: {
 		top: 0,
 		left: 0,
 		width: 25,
-		height: "100%",
+		height: '100%',
 		//background: `linear-gradient(0deg, ${Theme.color.green} 50%, ${Theme.color.lightGreen} 100%)`,
 		backgroundColor: Theme.color.green,
 		zIndex: 0,

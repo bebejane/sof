@@ -31,11 +31,11 @@ export default function EmotionalDiaryItem() {
 
 	if (!diary) return <Text>Hittade ej dagboksinlägg med id: {id}</Text>;
 
-	const { sovEmotionalDiary } = data;
+	const { sofEmotionalDiary } = data;
 
 	return (
 		<PageView>
-			{sovEmotionalDiary?.inputs.map(({ id, label, text, slug }, i) => (
+			{sofEmotionalDiary?.inputs.map(({ id, label, text, slug }, i) => (
 				<React.Fragment key={i}>
 					<Header size='small' margin='small'>
 						{label}

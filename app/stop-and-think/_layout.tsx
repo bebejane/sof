@@ -5,7 +5,7 @@ import StackHeader from '@/components/StackHeader';
 
 export default function Layout() {
 	const [data, error, loading, retry] = useQuery<StopAndThinkStepsQuery>(StopAndThinkStepsDocument);
-	const { allSovStopAndThinkTools: tools } = data;
+	const { allSofStopAndThinkTools: tools } = data;
 
 	return (
 		<StackHeader>

@@ -1,12 +1,12 @@
-import { useNavigation } from "expo-router";
-import { StyleSheet } from "react-native";
-import Theme from "@/styles/theme";
-import { useQuery } from "@/lib/client";
-import { Button, Loader, PageView } from "@/components/ui";
-import StructuredContent from "@/components/StructuredContent";
-import { StopAndThinkToolDocument } from "@/graphql";
-import { useLocalSearchParams } from "expo-router";
-import { useEffect } from "react";
+import { useNavigation } from 'expo-router';
+import { StyleSheet } from 'react-native';
+import Theme from '@/styles/theme';
+import { useQuery } from '@/lib/client';
+import { Button, Loader, PageView } from '@/components/ui';
+import StructuredContent from '@/components/StructuredContent';
+import { StopAndThinkToolDocument } from '@/graphql';
+import { useLocalSearchParams } from 'expo-router';
+import { useEffect } from 'react';
 
 export type Props = {
 	params: {
@@ -22,23 +22,16 @@ export default function StopAndThinkTool() {
 	});
 
 	useEffect(() => {
-		navigation.setOptions({ title: data.sovStopAndThinkTool?.title });
+		navigation.setOptions({ title: data.sofStopAndThinkTool?.title });
 	}, [data]);
 
-	if (loading || error)
-		return (
-			<Loader
-				loading={loading}
-				error={error}
-				onRetry={retry}
-			/>
-		);
+	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
 
-	const { sovStopAndThinkTool } = data;
+	const { sofStopAndThinkTool } = data;
 
 	return (
 		<PageView>
-			<StructuredContent content={sovStopAndThinkTool?.content} />
+			<StructuredContent content={sofStopAndThinkTool?.content} />
 			{/*<Button onPress={retry}>Reload</Button>*/}
 		</PageView>
 	);
@@ -47,28 +40,28 @@ export default function StopAndThinkTool() {
 const s = StyleSheet.create({
 	container: {
 		flex: 1,
-		display: "flex",
+		display: 'flex',
 		padding: 20,
-		justifyContent: "center",
-		backgroundColor: "transparent",
+		justifyContent: 'center',
+		backgroundColor: 'transparent',
 		opacity: 0.5,
-		height: "100%",
+		height: '100%',
 	},
 	box: {
 		backgroundColor: Theme.color.white,
 		padding: Theme.padding,
 	},
 	tools: {
-		display: "flex",
-		flexDirection: "column",
+		display: 'flex',
+		flexDirection: 'column',
 	},
 	toolItem: {
-		display: "flex",
-		flexDirection: "row",
+		display: 'flex',
+		flexDirection: 'row',
 	},
 	disabled: {
 		opacity: 0.5,
-		pointerEvents: "none",
+		pointerEvents: 'none',
 	},
 	selected: {
 		color: Theme.color.green,

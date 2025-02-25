@@ -76,7 +76,7 @@ const useStore = create(persist<StoreState>((set, get) => ({
   },
 }), {
   version: 1,
-  name: 'sov',
+  name: 'sof',
   storage: createJSONStorage(() => AsyncStorage),
   migrate: async (state: any, version: number) => {
     if (version < 1) {

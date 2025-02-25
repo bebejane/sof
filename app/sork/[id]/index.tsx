@@ -33,11 +33,11 @@ export default function SorkItem() {
 
 	if (!sork) return <Text>Hittade ej inlägg med id: {id}</Text>;
 
-	const { sovSork } = data;
+	const { sofSork } = data;
 
 	return (
 		<PageView>
-			{sovSork?.inputs.map(({ id, label, text, slug }, i) => (
+			{sofSork?.inputs.map(({ id, label, text, slug }, i) => (
 				<React.Fragment key={i}>
 					<Header size='small' margin='small'>
 						{label}

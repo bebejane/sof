@@ -22,18 +22,18 @@ export default function Sork() {
 
 	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
 
-	const { sovSork } = data;
+	const { sofSork } = data;
 
-	if (!sovSork) return <Text>Det finns ingen data...</Text>;
+	if (!sofSork) return <Text>Det finns ingen data...</Text>;
 
-	const itemLabelSlug = sovSork?.inputs.find(
+	const itemLabelSlug = sofSork?.inputs.find(
 		(item) => item.label.toLowerCase() === 'situation'
 	)?.slug;
 
 	const isValidItem = () => {
 		const currentItem: { [key: string]: string | number } = {};
 
-		sovSork?.inputs.forEach((item) => {
+		sofSork?.inputs.forEach((item) => {
 			currentItem[item.slug] = storeData[section]?.[item.slug];
 		});
 
@@ -49,7 +49,7 @@ export default function Sork() {
 			date: new Date().toString(),
 		};
 
-		sovSork?.inputs.forEach((item) => {
+		sofSork?.inputs.forEach((item) => {
 			currentItem[item.slug] = storeData[section]?.[item.slug];
 		});
 
@@ -57,15 +57,15 @@ export default function Sork() {
 			new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1
 		);
 
-		const resetFields = sovSork?.inputs.map((item: any) => item.slug) as string[];
+		const resetFields = sofSork?.inputs.map((item: any) => item.slug) as string[];
 		updateData(sorks, 'sorks');
 		resetKeys(resetFields, section);
 	};
 
 	return (
 		<PageView>
-			{sovSork?.inputs.map((item) =>
-				item.__typename === 'SovInputTextRecord' ? (
+			{sofSork?.inputs.map((item) =>
+				item.__typename === 'SofInputTextRecord' ? (
 					<React.Fragment key={item.id}>
 						<TextInput title={item.label} label={item.text} slug={item.slug} />
 					</React.Fragment>
@@ -83,7 +83,7 @@ export default function Sork() {
 			<Button
 				onPress={() =>
 					resetKeys(
-						sovSork.inputs.map((item) => item.slug),
+						sofSork.inputs.map((item) => item.slug),
 						section
 					)
 				}

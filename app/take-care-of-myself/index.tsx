@@ -1,9 +1,9 @@
-import { Paragraph, PageView, Loader, TextInput, Button, Spacer } from "@/components/ui";
-import { Text } from "react-native";
-import { useQuery } from "@/lib/client";
-import { TakeCareOfYourselfDocument } from "@/graphql";
-import useStore from "../../lib/store";
-import { useSegments } from "expo-router";
+import { Paragraph, PageView, Loader, TextInput, Button, Spacer } from '@/components/ui';
+import { Text } from 'react-native';
+import { useQuery } from '@/lib/client';
+import { TakeCareOfYourselfDocument } from '@/graphql';
+import useStore from '../../lib/store';
+import { useSegments } from 'expo-router';
 
 export default function TekeCareOfMyself() {
 	const [section] = useSegments();
@@ -12,32 +12,21 @@ export default function TekeCareOfMyself() {
 		TakeCareOfYourselfDocument
 	);
 
-	if (loading || error)
-		return (
-			<Loader
-				loading={loading}
-				error={error}
-				onRetry={retry}
-			/>
-		);
+	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
 
-	const { sovTakeCareOfMyself } = data;
-	if (!sovTakeCareOfMyself) return <Text>Det finns ingen data...</Text>;
+	const { sofTakeCareOfMyself } = data;
+	if (!sofTakeCareOfMyself) return <Text>Det finns ingen data...</Text>;
 
 	return (
 		<PageView>
-			<Paragraph>{sovTakeCareOfMyself.intro}</Paragraph>
-			{sovTakeCareOfMyself.inputs.map(({ id, label, slug }) => (
-				<TextInput
-					key={id}
-					slug={slug}
-					label={label}
-				/>
+			<Paragraph>{sofTakeCareOfMyself.intro}</Paragraph>
+			{sofTakeCareOfMyself.inputs.map(({ id, label, slug }) => (
+				<TextInput key={id} slug={slug} label={label} />
 			))}
 			<Button
 				onPress={() =>
 					resetKeys(
-						sovTakeCareOfMyself.inputs.map(({ slug }) => slug),
+						sofTakeCareOfMyself.inputs.map(({ slug }) => slug),
 						section
 					)
 				}

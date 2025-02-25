@@ -7,14 +7,14 @@ export default function ValuedDirectionWithGoal() {
 
 	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
 
-	const { sovValuedDirection } = data;
+	const { sofValuedDirection } = data;
 
 	return (
 		<PageView>
-			<Paragraph>{sovValuedDirection?.intro}</Paragraph>
-			<TextInput slug={sovValuedDirection?.input.slug} label={sovValuedDirection?.input.label} />
-			<Paragraph>{sovValuedDirection?.text}</Paragraph>
-			<Image data={sovValuedDirection?.image as FileField} />
+			<Paragraph>{sofValuedDirection?.intro}</Paragraph>
+			<TextInput slug={sofValuedDirection?.input.slug} label={sofValuedDirection?.input.label} />
+			<Paragraph>{sofValuedDirection?.text}</Paragraph>
+			<Image data={sofValuedDirection?.image as FileField} />
 		</PageView>
 	);
 }
