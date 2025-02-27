@@ -105,7 +105,7 @@ query CalmingTooling {
 	sofCalmingTooling {
 		id
 	}
-	allSofCalmingToolingTools {
+	allSofCalmingToolingTools(first: 100) {
 		...CalmingToolingToolFragment
 	}
 }
