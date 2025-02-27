@@ -1,7 +1,7 @@
 import { Loader, Text } from '@/components/ui';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useQuery } from '@/lib/client';
-import { CalmingToolingToolDocument } from '@/graphql';
+import { CalmingToolingDocument } from '@/graphql';
 import Theme from '@/styles/theme';
 import { useNavigation, useRouter } from 'expo-router';
 import useStore from '../../lib/store';
@@ -13,17 +13,14 @@ export const NUM_STEPS = 6;
 export const defaultSteps = new Array(NUM_STEPS).fill(null);
 
 type Step = {
-	tool: CalmingToolingToolQuery['allSofCalmingToolingTools'][0];
+	tool: CalmingToolingQuery['allSofCalmingToolingTools'][0];
 };
 
 export default function CalmingTools() {
 	const navigation = useNavigation();
-	const [data, error, loading, retry] = useQuery<CalmingToolingToolQuery>(
-		CalmingToolingToolDocument
-	);
+	const [data, error, loading, retry] = useQuery<CalmingToolingQuery>(CalmingToolingDocument);
 	const { updateData, data: storeData } = useStore();
 	const steps = defaultSteps.map((s, i) => storeData?.steps?.[i] ?? defaultSteps[i]);
-
 	const openRowRef = useRef<any | null>(null);
 	const onRowDidOpen = (rowKey: any, rowMap: any) => (openRowRef.current = rowMap[rowKey]);
 	const closeOpenRow = () => openRowRef.current?.closeRow?.();

@@ -101,7 +101,7 @@ query MaintanencePlan {
 	}
 }
 
-query CalmingToolingTool {
+query CalmingTooling {
 	sofCalmingTooling {
 		id
 	}
@@ -110,7 +110,7 @@ query CalmingToolingTool {
 	}
 }
 
-query CalmingToolStep($id: ItemId) {
+query CalmingToolingTool($id: ItemId) {
 	sofCalmingToolingTool(filter: { id: { eq: $id } }) {
 		...CalmingToolingToolFragment
 	}

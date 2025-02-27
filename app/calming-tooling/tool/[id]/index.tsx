@@ -4,7 +4,7 @@ import Theme from '@/styles/theme';
 import { useQuery } from '@/lib/client';
 import { Button, Loader, PageView } from '@/components/ui';
 import StructuredContent from '@/components/StructuredContent';
-import { CalmingToolToolDocument } from '@/graphql';
+import { CalmingToolingToolDocument } from '@/graphql';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect } from 'react';
 
@@ -17,22 +17,24 @@ export type Props = {
 export default function CalmingToolTool() {
 	const navigation = useNavigation();
 	const id = useLocalSearchParams().id as string;
-	const [data, error, loading, retry] = useQuery<CalmingToolToolQuery>(CalmingToolToolDocument, {
-		variables: { id },
-	});
+	const [data, error, loading, retry] = useQuery<CalmingToolingToolQuery>(
+		CalmingToolingToolDocument,
+		{
+			variables: { id },
+		}
+	);
 
 	useEffect(() => {
-		navigation.setOptions({ title: data.sofCalmingToolTool?.title });
+		navigation.setOptions({ title: data.sofCalmingToolingTool?.title });
 	}, [data]);
 
 	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
 
-	const { sofCalmingToolTool } = data;
+	const { sofCalmingToolingTool } = data;
 
 	return (
 		<PageView>
-			<StructuredContent content={sofCalmingToolTool?.content} />
-			{/*<Button onPress={retry}>Reload</Button>*/}
+			<StructuredContent content={sofCalmingToolingTool?.content} />
 		</PageView>
 	);
 }

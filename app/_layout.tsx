@@ -61,6 +61,13 @@ export const menu: Menu = [
 		},
 	},
 	{
+		href: '/calming-tooling',
+		name: 'calming-tooling',
+		options: {
+			title: 'Lugnande verktyg',
+		},
+	},
+	{
 		href: '/sound-exercises',
 		name: 'sound-exercises/index',
 		options: {
@@ -74,13 +81,7 @@ export const menu: Menu = [
 			title: 'Vidmakthållandeplan',
 		},
 	},
-	{
-		href: '/calming-tooling',
-		name: 'calming-tooling',
-		options: {
-			title: 'Lugnande verktyg',
-		},
-	},
+
 	{
 		href: '/sork',
 		name: 'sork',
