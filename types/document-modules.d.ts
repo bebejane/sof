@@ -21,6 +21,7 @@ export const MaintanencePlan: DocumentNode;
 export const CalmingTooling: DocumentNode;
 export const CalmingToolingTool: DocumentNode;
 export const EmotionalDiary: DocumentNode;
+export const ToleranceWindow: DocumentNode;
 export const CalmingToolingToolFragment: DocumentNode;
 export const TextInputFragment: DocumentNode;
 export const DateInputFragment: DocumentNode;

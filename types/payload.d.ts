@@ -2303,6 +2303,8 @@ type Query = {
   /** Returns a specific record */
   sofTakeCareOfYourselfCategory?: Maybe<SofTakeCareOfYourselfCategoryRecord>;
   /** Returns the single instance record */
+  sofToleranceWindow?: Maybe<SofToleranceWindowRecord>;
+  /** Returns the single instance record */
   sovAssessViolence?: Maybe<SovAssessViolenceRecord>;
   /** Returns a specific record */
   sovAssessViolenceCategory?: Maybe<SovAssessViolenceCategoryRecord>;
@@ -2842,6 +2844,13 @@ type QuerysofTakeCareOfYourselfCategoryArgs = {
   filter?: InputMaybe<SofTakeCareOfYourselfCategoryModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<SofTakeCareOfYourselfCategoryModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QuerysofToleranceWindowArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
 };
 
 
@@ -4039,6 +4048,48 @@ type SofTakeCareOfYourselfCategoryRecord = RecordInterface & {
 
 /** Record of type Ta hand om dig själv (kategori) (sof) (sof_take_care_of_yourself_category) */
 type SofTakeCareOfYourselfCategoryRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+type SofToleranceWindowModelIntroField = {
+  __typename?: 'SofToleranceWindowModelIntroField';
+  blocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type SofToleranceWindowModelIntroToolsField = {
+  __typename?: 'SofToleranceWindowModelIntroToolsField';
+  blocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+/** Record of type Toleransfönstret (sof_tolerance_window) */
+type SofToleranceWindowRecord = RecordInterface & {
+  __typename?: 'SofToleranceWindowRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  inputs: Array<SofInputTextRecord>;
+  intro?: Maybe<SofToleranceWindowModelIntroField>;
+  introTools?: Maybe<SofToleranceWindowModelIntroToolsField>;
+};
+
+
+/** Record of type Toleransfönstret (sof_tolerance_window) */
+type SofToleranceWindowRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -5616,6 +5667,11 @@ type EmotionalDiaryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type EmotionalDiaryQuery = { __typename?: 'Query', sofEmotionalDiary?: { __typename?: 'SofEmotionalDiaryRecord', id: any, inputs: Array<{ __typename: 'SofInputSliderRecord', id: any, label: string, text?: string | null, slug: string, min: any, max: any } | { __typename: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string }> } | null };
+
+type ToleranceWindowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type ToleranceWindowQuery = { __typename?: 'Query', sofToleranceWindow?: { __typename?: 'SofToleranceWindowRecord', id: any, intro?: { __typename?: 'SofToleranceWindowModelIntroField', blocks: Array<string>, links: Array<string>, value: any } | null, introTools?: { __typename?: 'SofToleranceWindowModelIntroToolsField', blocks: Array<string>, links: Array<string>, value: any } | null, inputs: Array<{ __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string }> } | null, allSofCalmingToolingTools: Array<{ __typename?: 'SofCalmingToolingToolRecord', id: any, title: string, description: string, content?: { __typename?: 'SofCalmingToolingToolModelContentField', value: any, links: Array<string>, blocks: Array<{ __typename: 'AudioBlockRecord', id: any, audio: { __typename?: 'FileField', url: string } } | { __typename: 'ImageBlockRecord', id: any, image: { __typename?: 'FileField', id: any, url: string, alt?: string | null, width?: any | null, height?: any | null, video?: { __typename?: 'UploadVideoField', streamingUrl: string } | null } } | { __typename: 'TableBlockRecord', id: any, tableData?: any | null } | { __typename: 'TextInputBlockSofRecord', id: any, input?: { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string } | null }> } | null }> };
 
 type CalmingToolingToolFragment = { __typename?: 'SofCalmingToolingToolRecord', id: any, title: string, description: string, content?: { __typename?: 'SofCalmingToolingToolModelContentField', value: any, links: Array<string>, blocks: Array<{ __typename: 'AudioBlockRecord', id: any, audio: { __typename?: 'FileField', url: string } } | { __typename: 'ImageBlockRecord', id: any, image: { __typename?: 'FileField', id: any, url: string, alt?: string | null, width?: any | null, height?: any | null, video?: { __typename?: 'UploadVideoField', streamingUrl: string } | null } } | { __typename: 'TableBlockRecord', id: any, tableData?: any | null } | { __typename: 'TextInputBlockSofRecord', id: any, input?: { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string } | null }> } | null };
 

@@ -131,6 +131,28 @@ query EmotionalDiary {
 	}
 }
 
+query ToleranceWindow {
+	sofToleranceWindow {
+		id
+		intro {
+			blocks
+			links
+			value
+		}
+		introTools {
+			blocks
+			links
+			value
+		}
+		inputs {
+			...TextInputFragment
+		}
+	}
+	allSofCalmingToolingTools {
+		...CalmingToolingToolFragment
+	}
+}
+
 fragment CalmingToolingToolFragment on SofCalmingToolingToolRecord {
 	id
 	title

@@ -81,7 +81,13 @@ export const menu: Menu = [
 			title: 'Vidmakthållandeplan',
 		},
 	},
-
+	{
+		href: '/tolerance-window',
+		name: 'tolerance-window/index',
+		options: {
+			title: 'Toleransfönster',
+		},
+	},
 	{
 		href: '/sork',
 		name: 'sork',
