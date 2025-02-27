@@ -8,20 +8,20 @@ declare module '*/MediaFragment.gql' {
 }
     
 
-declare module '*/sov.gql' {
+declare module '*/sof.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const ValuedDirection: DocumentNode;
+  export const MyGoal: DocumentNode;
 export const TakeCareOfYourself: DocumentNode;
 export const HomeAssignment: DocumentNode;
-export const AssessViolence: DocumentNode;
+export const AssessProgress: DocumentNode;
 export const Sork: DocumentNode;
 export const SoundExercise: DocumentNode;
 export const MaintanencePlan: DocumentNode;
-export const StopAndThinkSteps: DocumentNode;
-export const StopAndThinkTool: DocumentNode;
+export const CalmingToolingTool: DocumentNode;
+export const CalmingToolStep: DocumentNode;
 export const EmotionalDiary: DocumentNode;
-export const StopAndThinkToolFragment: DocumentNode;
+export const CalmingToolingToolFragment: DocumentNode;
 export const TextInputFragment: DocumentNode;
 export const DateInputFragment: DocumentNode;
 export const SliderInputFragment: DocumentNode;

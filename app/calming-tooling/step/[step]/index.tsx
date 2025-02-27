@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, TouchableOpacity, View, FlatList } from 'r
 import Theme from '@/styles/theme';
 import { useQuery } from '@/lib/client';
 import { Loader, Spacer, Button } from '@/components/ui';
-import { StopAndThinkStepsDocument } from '@/graphql';
+import { CalmingToolStepsDocument } from '@/graphql';
 import useStore from '@/lib/store';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { defaultSteps } from '../../index';
@@ -19,7 +19,7 @@ export default function StopAndthinkStep() {
 	const router = useRouter();
 	const navigation = useNavigation();
 	const { updateData, data: storeData } = useStore();
-	const [data, error, loading, retry] = useQuery<StopAndThinkStepsQuery>(StopAndThinkStepsDocument);
+	const [data, error, loading, retry] = useQuery<CalmingToolStepsQuery>(CalmingToolStepsDocument);
 	const step = parseInt(useLocalSearchParams().step as string) ?? 0;
 	const steps = defaultSteps.map((s, i) => storeData?.steps?.[i] ?? defaultSteps[i]);
 
@@ -35,13 +35,13 @@ export default function StopAndthinkStep() {
 		router.back();
 	}
 
-	const { allSofStopAndThinkTools: tools } = data;
+	const { allSofCalmingToolTools: tools } = data;
 	const selectedTool = tools.find(({ id }) => id === steps[step]);
 	const availableTools = tools.filter(({ id }) => !steps.find((s) => s === id));
 
 	return (
 		<View style={s.container}>
-			<Link href='/stop-and-think' asChild>
+			<Link href='/calming-tools' asChild>
 				<Pressable style={StyleSheet.absoluteFill} />
 			</Link>
 			<FlatList

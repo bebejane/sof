@@ -1,7 +1,7 @@
 import { Loader, Text } from '@/components/ui';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useQuery } from '@/lib/client';
-import { StopAndThinkStepsDocument } from '@/graphql';
+import { CalmingToolingToolDocument } from '@/graphql';
 import Theme from '@/styles/theme';
 import { useNavigation, useRouter } from 'expo-router';
 import useStore from '../../lib/store';
@@ -13,12 +13,14 @@ export const NUM_STEPS = 6;
 export const defaultSteps = new Array(NUM_STEPS).fill(null);
 
 type Step = {
-	tool: StopAndThinkStepsQuery['allSofStopAndThinkTools'][0];
+	tool: CalmingToolingToolQuery['allSofCalmingToolingTools'][0];
 };
 
-export default function StopAndThink() {
+export default function CalmingTools() {
 	const navigation = useNavigation();
-	const [data, error, loading, retry] = useQuery<StopAndThinkStepsQuery>(StopAndThinkStepsDocument);
+	const [data, error, loading, retry] = useQuery<CalmingToolingToolQuery>(
+		CalmingToolingToolDocument
+	);
 	const { updateData, data: storeData } = useStore();
 	const steps = defaultSteps.map((s, i) => storeData?.steps?.[i] ?? defaultSteps[i]);
 
@@ -32,7 +34,7 @@ export default function StopAndThink() {
 
 	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
 
-	const { allSofStopAndThinkTools: tools } = data;
+	const { allSofCalmingToolingTools: tools } = data;
 
 	return (
 		<View style={s.container}>
@@ -97,7 +99,9 @@ const Step = ({ toolId, step, label }: StepProps) => {
 			style={[s.step, enabled ? s.enabled : undefined]}
 			activeOpacity={0.9}
 			onPress={() =>
-				router.navigate(toolId ? `/stop-and-think/tool/${toolId}` : `/stop-and-think/step/${step}`)
+				router.navigate(
+					toolId ? `/calming-tooling/tool/${toolId}` : `/calming-tooling/step/${step}`
+				)
 			}
 		>
 			<Text style={[s.stepText, enabled && s.stepTextEnabled]}>{label ?? '+'}</Text>

@@ -33,10 +33,10 @@ export const menu: Menu = [
 		},
 	},
 	{
-		href: '/valued-direction',
-		name: 'valued-direction/index',
+		href: '/my-goals',
+		name: 'my-goals/index',
 		options: {
-			title: 'Värderad riktning med mål',
+			title: 'Mina målsättningar',
 		},
 	},
 	{
@@ -54,10 +54,10 @@ export const menu: Menu = [
 		},
 	},
 	{
-		href: '/assess-violence',
-		name: 'assess-violence/index',
+		href: '/assess-progress',
+		name: 'assess-progress/index',
 		options: {
-			title: 'Skatta våld',
+			title: 'Skatta framgång',
 		},
 	},
 	{
@@ -75,10 +75,10 @@ export const menu: Menu = [
 		},
 	},
 	{
-		href: '/stop-and-think',
-		name: 'stop-and-think',
+		href: '/calming-tooling',
+		name: 'calming-tooling',
 		options: {
-			title: 'Stop & Tänk stegen',
+			title: 'Lugnande verktyg',
 		},
 	},
 	{

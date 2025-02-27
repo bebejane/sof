@@ -23,25 +23,6 @@ export default function HomeAssignment() {
 
 	const { sofHomeAssignment } = data;
 
-	const isValidItem = () => {
-		const currentItem: { [key: string]: string | number } = {};
-
-		sofHomeAssignment?.inputs.forEach((item) => {
-			currentItem[item.slug] = storeData[section]?.[item.slug];
-		});
-
-		let valid = true;
-
-		Object.keys(currentItem).forEach((key) => {
-			if (currentItem[key] === undefined || currentItem[key] === null || currentItem[key] === '') {
-				valid = false;
-				return;
-			}
-		});
-
-		return valid;
-	};
-
 	const save = () => {
 		const currentItem: { [key: string]: string | number } = {
 			id: nanoid(),
@@ -71,9 +52,7 @@ export default function HomeAssignment() {
 						<DatePicker key={item.id} id={item.id} label={item.label} slug={item.slug} />
 					)
 				)}
-				<Button disabled={!isValidItem()} onPress={save}>
-					Spara
-				</Button>
+				<Button onPress={save}>Spara</Button>
 				<Spacer />
 				<List
 					onPress={(id) => router.navigate(`/home-assignment/${id}`)}

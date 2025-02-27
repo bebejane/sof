@@ -1,16 +1,17 @@
-query ValuedDirection {
-	sofValuedDirection {
+query MyGoal {
+	sofMyGoal {
 		id
-		intro
-		text
-		input {
+		performanceGoals {
 			__typename
 			... on SofInputTextRecord {
 				...TextInputFragment
 			}
 		}
-		image {
-			...MediaFragment
+		behavioralGoals {
+			__typename
+			... on SofInputTextRecord {
+				...TextInputFragment
+			}
 		}
 	}
 }
@@ -44,14 +45,11 @@ query HomeAssignment {
 	}
 }
 
-query AssessViolence {
-	sofAssessViolence {
+query AssessProgress {
+	sofAssessProgress {
 		id
 		intro
-		sinceLastSession {
-			...SliderInputFragment
-		}
-		otherProblems {
+		inputs {
 			...SliderInputFragment
 		}
 	}
@@ -103,18 +101,18 @@ query MaintanencePlan {
 	}
 }
 
-query StopAndThinkSteps {
-	sofStopAndThink {
+query CalmingToolingTool {
+	sofCalmingTooling {
 		id
 	}
-	allSofStopAndThinkTools {
-		...StopAndThinkToolFragment
+	allSofCalmingToolingTools {
+		...CalmingToolingToolFragment
 	}
 }
 
-query StopAndThinkTool($id: ItemId) {
-	sofStopAndThinkTool(filter: { id: { eq: $id } }) {
-		...StopAndThinkToolFragment
+query CalmingToolStep($id: ItemId) {
+	sofCalmingToolingTool(filter: { id: { eq: $id } }) {
+		...CalmingToolingToolFragment
 	}
 }
 
@@ -133,7 +131,7 @@ query EmotionalDiary {
 	}
 }
 
-fragment StopAndThinkToolFragment on SofStopAndThinkToolRecord {
+fragment CalmingToolingToolFragment on SofCalmingToolingToolRecord {
 	id
 	title
 	description

@@ -27,6 +27,7 @@ export function useQuery<T>(query: any, options?: any): [data: T, error: Error |
       })
       .catch((err) => {
         setError(err)
+        console.error(err)
       })
       .finally(() => {
         setLoading(false)

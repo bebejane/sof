@@ -102,7 +102,7 @@ export default function Sork() {
 				items={items?.map((item) => ({
 					id: item.id,
 					date: item.date,
-					label: itemLabelSlug && item[itemLabelSlug] ? item[itemLabelSlug] : 'Ingen titel...',
+					label: itemLabelSlug && item[itemLabelSlug] ? item[itemLabelSlug] : undefined,
 				}))}
 			/>
 		</PageView>

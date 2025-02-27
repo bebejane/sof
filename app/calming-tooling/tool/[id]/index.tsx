@@ -4,7 +4,7 @@ import Theme from '@/styles/theme';
 import { useQuery } from '@/lib/client';
 import { Button, Loader, PageView } from '@/components/ui';
 import StructuredContent from '@/components/StructuredContent';
-import { StopAndThinkToolDocument } from '@/graphql';
+import { CalmingToolToolDocument } from '@/graphql';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect } from 'react';
 
@@ -14,24 +14,24 @@ export type Props = {
 	};
 };
 
-export default function StopAndThinkTool() {
+export default function CalmingToolTool() {
 	const navigation = useNavigation();
 	const id = useLocalSearchParams().id as string;
-	const [data, error, loading, retry] = useQuery<StopAndThinkToolQuery>(StopAndThinkToolDocument, {
+	const [data, error, loading, retry] = useQuery<CalmingToolToolQuery>(CalmingToolToolDocument, {
 		variables: { id },
 	});
 
 	useEffect(() => {
-		navigation.setOptions({ title: data.sofStopAndThinkTool?.title });
+		navigation.setOptions({ title: data.sofCalmingToolTool?.title });
 	}, [data]);
 
 	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
 
-	const { sofStopAndThinkTool } = data;
+	const { sofCalmingToolTool } = data;
 
 	return (
 		<PageView>
-			<StructuredContent content={sofStopAndThinkTool?.content} />
+			<StructuredContent content={sofCalmingToolTool?.content} />
 			{/*<Button onPress={retry}>Reload</Button>*/}
 		</PageView>
 	);
