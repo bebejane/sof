@@ -1,10 +1,11 @@
 import { Loader, TextInput, PageView, Spacer, Text } from '@/components/ui';
 import VerticalSlider from '@/components/VerticalSlider';
+import { Picker } from '@react-native-picker/picker';
 import { StyleSheet, View, SafeAreaView } from 'react-native';
 import { useQuery } from '@/lib/client';
 import { ToleranceWindowDocument } from '@/graphql';
 import StructuredContent from '@/components/StructuredContent';
-import React from 'react';
+import React, { useState } from 'react';
 import Theme from '@/styles/theme';
 
 const sliderWidth = 30;
@@ -17,6 +18,7 @@ const levels = [
 ];
 
 export default function ToleranceWindows() {
+	const [selectedTool, setSelectedTool] = useState<string | null>(null);
 	const [data, error, loading, retry] = useQuery<ToleranceWindowQuery>(ToleranceWindowDocument);
 	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
 
@@ -30,7 +32,16 @@ export default function ToleranceWindows() {
 				<TextInput key={i} slug={input.slug} label={input.label} />
 			))}
 			<StructuredContent content={sofToleranceWindow?.introTools} />
-			<Text>{tools.map(({ title }) => title).join(', ')}</Text>
+			<Picker
+				style={s.picker}
+				numberOfLines={1}
+				selectedValue={selectedTool}
+				onValueChange={(itemValue, itemIndex) => setSelectedTool(itemValue)}
+			>
+				{tools.map(({ id, title }) => (
+					<Picker.Item label={title} value={id} key={id} style={s.pickerItem} />
+				))}
+			</Picker>
 			<Spacer />
 			<ToleranceVerticalSlider />
 		</PageView>
@@ -41,7 +52,7 @@ function ToleranceVerticalSlider() {
 	const [value, setValue] = React.useState(1);
 
 	return (
-		<View style={s.view}>
+		<View style={s.sliderView}>
 			<View style={s.slider}>
 				<VerticalSlider
 					value={value}
@@ -83,7 +94,7 @@ function ToleranceVerticalSlider() {
 
 			<View style={s.level}>
 				{levels.map((text, idx) => (
-					<View style={s.step}>
+					<View key={idx} style={s.step}>
 						<Text style={value === levels.length - 1 - idx && s.selected}>{text}</Text>
 					</View>
 				))}
@@ -93,7 +104,12 @@ function ToleranceVerticalSlider() {
 }
 
 const s = StyleSheet.create({
-	view: {
+	picker: {
+		borderColor: Theme.color.grey,
+		borderWidth: 2,
+	},
+	pickerItem: {},
+	sliderView: {
 		flex: 1,
 		flexDirection: 'row',
 		width: Theme.screenWidth - Theme.margin * 2,
