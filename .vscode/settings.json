@@ -4,6 +4,8 @@
     ".tmp": true,
     ".vscode": true,
     "node_modules": true,
-    "android": true
+    "android": true,
+    "ios": true,
+    "expo-env.d.ts": true
   },
 }

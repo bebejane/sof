@@ -2273,7 +2273,11 @@ type Query = {
   /** Returns a specific record */
   sofCalmingToolingTool?: Maybe<SofCalmingToolingToolRecord>;
   /** Returns the single instance record */
+  sofCreateEverydayFlow?: Maybe<SofCreateEverydayFlowRecord>;
+  /** Returns the single instance record */
   sofEmotionalDiary?: Maybe<SofEmotionalDiaryRecord>;
+  /** Returns the single instance record */
+  sofExpandLifeSpace?: Maybe<SofExpandLifeSpaceRecord>;
   /** Returns the single instance record */
   sofHome?: Maybe<SofHomeRecord>;
   /** Returns the single instance record */
@@ -2729,7 +2733,21 @@ type QuerysofCalmingToolingToolArgs = {
 
 
 /** The query root for this schema */
+type QuerysofCreateEverydayFlowArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
 type QuerysofEmotionalDiaryArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type QuerysofExpandLifeSpaceArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
@@ -3320,6 +3338,39 @@ type SofCalmingToolingToolRecorddescriptionArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+type SofCreateEverydayFlowModelIntroField = {
+  __typename?: 'SofCreateEverydayFlowModelIntroField';
+  blocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+/** Record of type Skapa vardagsflyt (sof_create_everyday_flow) */
+type SofCreateEverydayFlowRecord = RecordInterface & {
+  __typename?: 'SofCreateEverydayFlowRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  intro?: Maybe<SofCreateEverydayFlowModelIntroField>;
+};
+
+
+/** Record of type Skapa vardagsflyt (sof_create_everyday_flow) */
+type SofCreateEverydayFlowRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 type SofEmotionalDiaryModelInputsField = SofInputSliderRecord | SofInputTextRecord;
 
 /** Record of type Enkel känslodagbok (sof) (sof_emotional_diary) */
@@ -3345,6 +3396,39 @@ type SofEmotionalDiaryRecord = RecordInterface & {
 
 /** Record of type Enkel känslodagbok (sof) (sof_emotional_diary) */
 type SofEmotionalDiaryRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+type SofExpandLifeSpaceModelIntroField = {
+  __typename?: 'SofExpandLifeSpaceModelIntroField';
+  blocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+/** Record of type Vidga livsutrymmet (sof) (sof_expand_life_space) */
+type SofExpandLifeSpaceRecord = RecordInterface & {
+  __typename?: 'SofExpandLifeSpaceRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  intro?: Maybe<SofExpandLifeSpaceModelIntroField>;
+};
+
+
+/** Record of type Vidga livsutrymmet (sof) (sof_expand_life_space) */
+type SofExpandLifeSpaceRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -5672,6 +5756,16 @@ type ToleranceWindowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type ToleranceWindowQuery = { __typename?: 'Query', sofToleranceWindow?: { __typename?: 'SofToleranceWindowRecord', id: any, intro?: { __typename?: 'SofToleranceWindowModelIntroField', blocks: Array<string>, links: Array<string>, value: any } | null, introTools?: { __typename?: 'SofToleranceWindowModelIntroToolsField', blocks: Array<string>, links: Array<string>, value: any } | null, inputs: Array<{ __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string }> } | null, allSofCalmingToolingTools: Array<{ __typename?: 'SofCalmingToolingToolRecord', id: any, title: string, description: string, content?: { __typename?: 'SofCalmingToolingToolModelContentField', value: any, links: Array<string>, blocks: Array<{ __typename: 'AudioBlockRecord', id: any, audio: { __typename?: 'FileField', url: string } } | { __typename: 'ImageBlockRecord', id: any, image: { __typename?: 'FileField', id: any, url: string, alt?: string | null, width?: any | null, height?: any | null, video?: { __typename?: 'UploadVideoField', streamingUrl: string } | null } } | { __typename: 'TableBlockRecord', id: any, tableData?: any | null } | { __typename: 'TextInputBlockSofRecord', id: any, input?: { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string } | null }> } | null }> };
+
+type ExpandLifeSpaceQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type ExpandLifeSpaceQuery = { __typename?: 'Query', sofExpandLifeSpace?: { __typename?: 'SofExpandLifeSpaceRecord', id: any, intro?: { __typename?: 'SofExpandLifeSpaceModelIntroField', blocks: Array<string>, links: Array<string>, value: any } | null } | null };
+
+type CreateEverydayFlowQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type CreateEverydayFlowQuery = { __typename?: 'Query', sofCreateEverydayFlow?: { __typename?: 'SofCreateEverydayFlowRecord', id: any, intro?: { __typename?: 'SofCreateEverydayFlowModelIntroField', blocks: Array<string>, links: Array<string>, value: any } | null } | null };
 
 type CalmingToolingToolFragment = { __typename?: 'SofCalmingToolingToolRecord', id: any, title: string, description: string, content?: { __typename?: 'SofCalmingToolingToolModelContentField', value: any, links: Array<string>, blocks: Array<{ __typename: 'AudioBlockRecord', id: any, audio: { __typename?: 'FileField', url: string } } | { __typename: 'ImageBlockRecord', id: any, image: { __typename?: 'FileField', id: any, url: string, alt?: string | null, width?: any | null, height?: any | null, video?: { __typename?: 'UploadVideoField', streamingUrl: string } | null } } | { __typename: 'TableBlockRecord', id: any, tableData?: any | null } | { __typename: 'TextInputBlockSofRecord', id: any, input?: { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string } | null }> } | null };
 

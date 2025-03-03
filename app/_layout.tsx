@@ -89,6 +89,20 @@ export const menu: Menu = [
 		},
 	},
 	{
+		href: '/create-everyday-flow',
+		name: 'create-everyday-flow/index',
+		options: {
+			title: 'Skapa vardagsflyt',
+		},
+	},
+	{
+		href: '/expand-life-space',
+		name: 'expand-life-space/index',
+		options: {
+			title: 'Vidga livsutrymmet',
+		},
+	},
+	{
 		href: '/sork',
 		name: 'sork',
 		options: {

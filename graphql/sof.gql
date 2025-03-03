@@ -153,6 +153,28 @@ query ToleranceWindow {
 	}
 }
 
+query ExpandLifeSpace {
+	sofExpandLifeSpace {
+		id
+		intro {
+			blocks
+			links
+			value
+		}
+	}
+}
+
+query CreateEverydayFlow {
+	sofCreateEverydayFlow {
+		id
+		intro {
+			blocks
+			links
+			value
+		}
+	}
+}
+
 fragment CalmingToolingToolFragment on SofCalmingToolingToolRecord {
 	id
 	title
