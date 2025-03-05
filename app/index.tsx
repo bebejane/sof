@@ -16,7 +16,7 @@ export type ShortCut = {
 const shortcuts: ShortCut[] = [
 	{ name: 'Ljudövningar', route: '/sound-exercises', icon: 'headset-outline' },
 	{ name: 'Sork', route: '/sork', icon: 'options-outline' },
-	{ name: 'Stop & Tänk stegen', route: '/calming-tools', icon: 'hand-left-outline' },
+	{ name: 'Lugnande verktyg', route: '/calming-tooling', icon: 'hand-left-outline' },
 	{ name: 'Enkel känslodagbok', route: '/emotional-diary', icon: 'book-outline' },
 ];
 
