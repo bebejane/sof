@@ -129,13 +129,13 @@ const groups = [
 	{
 		id: 'my-change',
 		title: 'Min förändring',
-		items: menu.slice(1, 8),
+		items: menu.slice(1, 11),
 		open: true,
 	},
 	{
 		id: 'diary',
 		title: 'Dagbok mellan samtal',
-		items: menu.slice(8),
+		items: menu.slice(11),
 		open: true,
 	},
 ];
