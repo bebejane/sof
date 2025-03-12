@@ -53,7 +53,7 @@ export default function Home() {
 						items={diary
 							?.slice(0, 2)
 							.map(({ id, date, situation: label }) => ({ id, date, label }))}
-						emptyText='Du finns inga dagboksinlägg sparade...'
+						emptyText='Det finns inga dagboksinlägg sparade...'
 					/>
 				</View>
 				<Spacer />
@@ -68,7 +68,7 @@ export default function Home() {
 							date,
 							label,
 						}))}
-						emptyText='Du finns inga hemuppgifter sparade...'
+						emptyText='Det finns inga hemuppgifter sparade...'
 					/>
 				</View>
 			</PageView>
