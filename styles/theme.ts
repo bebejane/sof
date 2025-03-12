@@ -11,6 +11,7 @@ const themeVars = {
     error: '#8a0a01',
     green: '#015154',
     lightGreen: '#d3e6e3',
+    red: '#d80005'
   },
   fontSize: {
     default: 16,
@@ -34,6 +35,7 @@ const themeVars = {
 
 const Theme = {
   ...themeVars,
+  pageWidth: themeVars.screenWidth - (themeVars.padding * 2),
   font: { ...Font },
 };
 
