@@ -85,31 +85,7 @@ const useStore = create(persist<StoreState>((set, get) => ({
 }), {
   version: 1,
   name: 'sof',
-  storage: createJSONStorage(() => AsyncStorage),
-  migrate: async (state: any, version: number) => {
-    if (version < 1) {
-      console.log('migrating data...')
-      try {
-        const fileData = await AsyncStorage.getItem('file')
-        if (fileData) {
-          const data = JSON.parse(fileData as string)
-          const diary = (data?.kanslodagbok ?? []).map((d: any) => ({
-            'situation': d.dagbok?.situation,
-            'grundkansla': d.dagbok?.feeling,
-            'kanslotermometer': d.dagbok?.termometer,
-            'kanslan-i-kroppen': d.dagbok?.bodyFeeling,
-            'date': d.date
-          }))
-          state.data.diary = diary
-          await AsyncStorage.setItem('_file', JSON.stringify(fileData))
-          await AsyncStorage.removeItem('file')
-        }
-      } catch (e) {
-        console.log(e)
-      }
-      return state;
-    }
-  }
+  storage: createJSONStorage(() => AsyncStorage)
 }));
 
 export { shallow, useStore };
