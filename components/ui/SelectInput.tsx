@@ -46,5 +46,6 @@ const s = StyleSheet.create({
 	},
 	pickerItem: {
 		fontSize: Theme.fontSize.small,
+		fontWeight: "600",
 	},
 });
