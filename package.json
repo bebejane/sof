@@ -3,17 +3,19 @@
 	"main": "expo-router/entry",
 	"version": "1.0.0",
 	"scripts": {
-		"dev": "npm run codegen & expo start --ios",
+		"dev": "npm run codegen & expo start --ios --tunnel",
 		"dev:android": "npm run codegen & expo start --android --tunnel",
-		"android": "expo run:android",
 		"ios": "expo run:ios",
 		"ios:device": "expo run:ios --device",
+		"android": "expo run:android",
+		"android:device": "expo run:android --device",
 		"web": "expo start --web",
 		"test": "jest --watchAll",
 		"prebuild": "pnpx expo prebuild --clean",
 		"build:local": "eas build --local --profile production --platform ios",
-		"build:local:android": "eas build --local --profile preview --platform android",
-		"build": "eas build --auto-submit --profile production --platform ios",
+		"build:local:android": "eas build --local --profile production --platform android",
+		"build:ios": "EXPO_APPLE_TEAM_ID=85KU5LMS57 eas build --profile production --platform ios",
+		"build:android": "eas build --profile production --platform android --clear-cache",
 		"codegen": "graphql-codegen --watch"
 	},
 	"jest": {
