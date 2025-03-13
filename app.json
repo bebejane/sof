@@ -18,7 +18,8 @@
 			"supportsTablet": true,
 			"bundleIdentifier": "org.kt.sof",
 			"infoPlist": {
-				"ITSAppUsesNonExemptEncryption": false
+				"ITSAppUsesNonExemptEncryption": false,
+				"UIBackgroundModes": ["audio"]
 			}
 		},
 		"android": {
@@ -27,7 +28,9 @@
 				"foregroundImage": "./assets/icons/adaptive-icon.png",
 				"backgroundColor": "#015154"
 			},
-			"package": "org.kt.sof"
+			"package": "org.kt.sof",
+			"versionCode": 2,
+			"permissions": ["android.permission.WAKE_LOCK"]
 		},
 		"web": {
 			"bundler": "metro",
