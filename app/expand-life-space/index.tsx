@@ -10,6 +10,7 @@ import {
 	List,
 	Text,
 	DatePicker,
+	ReadMoreContent,
 } from '@/components/ui';
 import { useQuery } from '@/lib/client';
 import { ExpandLifeSpaceDocument } from '@/graphql';
@@ -26,7 +27,6 @@ export default function ExpandLifeSpace() {
 	const navigation = useNavigation();
 	const { updateData, data: storeData, resetKeys } = useStore();
 	const items = storeData.expandLifeSpaces ?? [];
-	const itemLabelSlug = 'vad-vill-jag-overvinna-exponera-mig-for';
 
 	useEffect(() => {
 		navigation.setOptions({ headerShown: false });
@@ -57,14 +57,21 @@ export default function ExpandLifeSpace() {
 		resetKeys(resetFields, section);
 	};
 
+	const itemLabelSlug = sofExpandLifeSpace?.inputs.find(
+		(item) => item.__typename === 'SofInputTextRecord'
+	)?.slug;
+	const itemValueSlug = sofExpandLifeSpace?.inputs.find(
+		(item) => item.__typename === 'SofInputSliderRecord'
+	)?.slug;
+
 	return (
 		<PageView>
-			<StructuredContent content={sofExpandLifeSpace?.intro} />
+			<ReadMoreContent>
+				<StructuredContent content={sofExpandLifeSpace?.intro} />
+			</ReadMoreContent>
 			{sofExpandLifeSpace?.inputs.map((item) =>
 				item.__typename === 'SofInputTextRecord' ? (
-					<React.Fragment key={item.id}>
-						<TextInput title={item.label} label={item.text} slug={item.slug} />
-					</React.Fragment>
+					<TextInput key={item.id} label={item.label} slug={item.slug} />
 				) : item.__typename === 'SofInputSliderRecord' ? (
 					<SliderInput
 						key={item.id}
@@ -97,7 +104,10 @@ export default function ExpandLifeSpace() {
 				items={items?.map((item) => ({
 					id: item.id,
 					date: item.date,
-					label: itemLabelSlug && item[itemLabelSlug] ? item[itemLabelSlug] : undefined,
+					label:
+						itemLabelSlug && item[itemLabelSlug] !== undefined ? item[itemLabelSlug] : undefined,
+					value:
+						itemValueSlug && item[itemValueSlug] !== undefined ? item[itemValueSlug] : undefined,
 				}))}
 			/>
 		</PageView>

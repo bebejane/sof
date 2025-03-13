@@ -1,4 +1,4 @@
-import { Paragraph, PageView, Loader, TextInput } from '@/components/ui';
+import { Paragraph, PageView, Loader, TextInput, ReadMoreContent } from '@/components/ui';
 import { useQuery } from '@/lib/client';
 import { MaintanencePlanDocument } from '@/graphql';
 
@@ -11,7 +11,9 @@ export default function MaintenancePlan() {
 
 	return (
 		<PageView>
-			<Paragraph>{sofMaintanencePlan?.intro}</Paragraph>
+			<ReadMoreContent>
+				<Paragraph>{sofMaintanencePlan?.intro}</Paragraph>
+			</ReadMoreContent>
 			{sofMaintanencePlan?.inputs.map(({ id, label, slug }) => (
 				<TextInput key={id} label={label} slug={slug} />
 			))}

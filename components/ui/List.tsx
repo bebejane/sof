@@ -4,7 +4,7 @@ import { formatDate } from '../../lib/utils';
 
 type Props = {
 	onPress: (id: string) => void;
-	items: { id: string; date: string; label: string }[] | null | undefined;
+	items: { id: string; date: string; label: string; value?: string }[] | null | undefined;
 	title: string;
 	emptyText?: string;
 };
@@ -29,6 +29,7 @@ export function List({ onPress, items, emptyText, title }: Props) {
 							<Text style={[s.column, s.text]} numberOfLines={1}>
 								{item.label ?? 'Ingen titel...'}
 							</Text>
+							{item.value && <Text style={[s.column, s.value]}>{item.value}</Text>}
 						</TouchableOpacity>
 					))}
 				</>
@@ -65,11 +66,15 @@ const s = StyleSheet.create({
 		marginBottom: Theme.margin / 2,
 	},
 	column: {
+		color: Theme.color.black,
 		padding: Theme.padding / 2,
 	},
 	text: {
 		flex: 1,
-		color: Theme.color.black,
+		fontWeight: 600,
+	},
+	value: {
+		flex: 0,
 		fontWeight: 600,
 	},
 	first: {

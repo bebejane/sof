@@ -6,6 +6,7 @@ import { useQuery } from '@/lib/client';
 import { ExpandLifeSpaceDocument } from '@/graphql';
 import React from 'react';
 import { useFocusEffect } from 'expo-router';
+import { formatDate } from '@/lib/utils';
 
 export type Props = {
 	params: {
@@ -37,12 +38,16 @@ export default function SorkItem() {
 
 	return (
 		<PageView>
-			{sofExpandLifeSpace?.inputs.map(({ id, label, text, slug }, i) => (
+			{sofExpandLifeSpace?.inputs.map(({ id, label, text, slug, __typename }, i) => (
 				<React.Fragment key={i}>
 					<Header size='small' margin='small'>
 						{label}
 					</Header>
-					<Text>{expandLifeSpace[slug]}</Text>
+					<Text>
+						{__typename === 'SofInputDateRecord'
+							? formatDate(expandLifeSpace[slug] as string, true)
+							: expandLifeSpace[slug]}
+					</Text>
 					<Spacer />
 				</React.Fragment>
 			))}

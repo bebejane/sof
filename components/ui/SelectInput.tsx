@@ -43,6 +43,7 @@ const s = StyleSheet.create({
 	picker: {
 		borderColor: Theme.color.grey,
 		borderWidth: 2,
+		marginBottom: Theme.margin,
 	},
 	pickerItem: {
 		fontSize: Theme.fontSize.small,
