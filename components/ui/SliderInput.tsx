@@ -23,7 +23,8 @@ export const SliderInput = ({
 }) => {
 	const [section] = useSegments();
 	const { updateData, data } = useStore();
-	const [value, setValue] = useState(slug ? data[section]?.[slug] ?? 0 : 0);
+	const defaultValue = slug ? data[section]?.[slug] ?? 0 : 0;
+	const [value, setValue] = useState(defaultValue);
 	const [valueLabel, setValueLabel] = useState(0);
 
 	const handleOnChangeComplete = (step: number) => {
@@ -35,6 +36,11 @@ export const SliderInput = ({
 	const handleOnValueChange = (step: number) => {
 		setValueLabel(step);
 	};
+
+	useEffect(() => {
+		setValue(defaultValue);
+		setValueLabel(defaultValue);
+	}, [defaultValue]);
 
 	return (
 		<View key={id} style={s.container}>
