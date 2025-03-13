@@ -97,7 +97,7 @@ export const menu: Menu = [
 	},
 	{
 		href: '/expand-life-space',
-		name: 'expand-life-space/index',
+		name: 'expand-life-space',
 		options: {
 			title: 'Vidga livsutrymmet',
 		},

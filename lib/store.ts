@@ -23,12 +23,19 @@ export type Sorks = {
   [key: string]: any
 }[]
 
+export type ExpandLifeSpaces = {
+  id: string,
+  date: string,
+  [key: string]: any
+}[]
+
 export interface StoreState {
   data: {
     diary: Diary
     steps: Steps
     assignments: Assignments
     sorks: Sorks
+    expandLifeSpaces: ExpandLifeSpaces
     [key: string]: any
   },
   theme: 'light' | 'dark',
@@ -43,6 +50,7 @@ const defaultState = {
   steps: [],
   assignments: [],
   sorks: [],
+  expandLifeSpaces: []
 }
 
 const useStore = create(persist<StoreState>((set, get) => ({

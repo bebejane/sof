@@ -2193,6 +2193,8 @@ type Query = {
   /** Returns meta information regarding a record collection */
   _allSofInputDatesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allSofInputSelectsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allSofInputSlidersMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allSofInputTextsMeta: CollectionMetadata;
@@ -2232,6 +2234,8 @@ type Query = {
   allSofCalmingToolingTools: Array<SofCalmingToolingToolRecord>;
   /** Returns a collection of records */
   allSofInputDates: Array<SofInputDateRecord>;
+  /** Returns a collection of records */
+  allSofInputSelects: Array<SofInputSelectRecord>;
   /** Returns a collection of records */
   allSofInputSliders: Array<SofInputSliderRecord>;
   /** Returns a collection of records */
@@ -2284,6 +2288,8 @@ type Query = {
   sofHomeAssignment?: Maybe<SofHomeAssignmentRecord>;
   /** Returns a specific record */
   sofInputDate?: Maybe<SofInputDateRecord>;
+  /** Returns a specific record */
+  sofInputSelect?: Maybe<SofInputSelectRecord>;
   /** Returns a specific record */
   sofInputSlider?: Maybe<SofInputSliderRecord>;
   /** Returns a specific record */
@@ -2368,6 +2374,13 @@ type Query_allSofCalmingToolingToolsMetaArgs = {
 /** The query root for this schema */
 type Query_allSofInputDatesMetaArgs = {
   filter?: InputMaybe<SofInputDateModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type Query_allSofInputSelectsMetaArgs = {
+  filter?: InputMaybe<SofInputSelectModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -2520,6 +2533,17 @@ type QueryallSofInputDatesArgs = {
   first?: InputMaybe<Scalars['IntType']['input']>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<SofInputDateModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
+type QueryallSofInputSelectsArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<SofInputSelectModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<SofInputSelectModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']['input']>;
 };
 
@@ -2773,6 +2797,15 @@ type QuerysofInputDateArgs = {
   filter?: InputMaybe<SofInputDateModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<SofInputDateModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QuerysofInputSelectArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<SofInputSelectModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<SofInputSelectModelOrderBy>>>;
 };
 
 
@@ -3399,6 +3432,8 @@ type SofEmotionalDiaryRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+type SofExpandLifeSpaceModelInputsField = SofInputDateRecord | SofInputSelectRecord | SofInputSliderRecord | SofInputTextRecord;
+
 type SofExpandLifeSpaceModelIntroField = {
   __typename?: 'SofExpandLifeSpaceModelIntroField';
   blocks: Array<Scalars['String']['output']>;
@@ -3423,6 +3458,7 @@ type SofExpandLifeSpaceRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
+  inputs: Array<SofExpandLifeSpaceModelInputsField>;
   intro?: Maybe<SofExpandLifeSpaceModelIntroField>;
 };
 
@@ -3561,6 +3597,77 @@ type SofInputDateRecord = RecordInterface & {
 
 /** Record of type Date Input (sof) (sof_input_date) */
 type SofInputDateRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+type SofInputSelectModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<SofInputSelectModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<SofInputSelectModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  label?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<SlugFilter>;
+  text?: InputMaybe<StringFilter>;
+};
+
+enum SofInputSelectModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  label_ASC = 'label_ASC',
+  label_DESC = 'label_DESC',
+  text_ASC = 'text_ASC',
+  text_DESC = 'text_DESC'
+}
+
+/** Record of type Select Input (sof) (sof_input_select) */
+type SofInputSelectRecord = RecordInterface & {
+  __typename?: 'SofInputSelectRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  label: Scalars['String']['output'];
+  options: Array<SofSelectOptionRecord>;
+  slug: Scalars['String']['output'];
+  text?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Record of type Select Input (sof) (sof_input_select) */
+type SofInputSelectRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -3834,6 +3941,32 @@ type SofMyGoalRecord = RecordInterface & {
 
 /** Record of type Mina målsättningar (sof) (sof_my_goal) */
 type SofMyGoalRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Block of type Select option (sof_select_option) */
+type SofSelectOptionRecord = RecordInterface & {
+  __typename?: 'SofSelectOptionRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  label: Scalars['String']['output'];
+};
+
+
+/** Block of type Select option (sof_select_option) */
+type SofSelectOptionRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -5760,7 +5893,7 @@ type ToleranceWindowQuery = { __typename?: 'Query', sofToleranceWindow?: { __typ
 type ExpandLifeSpaceQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ExpandLifeSpaceQuery = { __typename?: 'Query', sofExpandLifeSpace?: { __typename?: 'SofExpandLifeSpaceRecord', id: any, intro?: { __typename?: 'SofExpandLifeSpaceModelIntroField', blocks: Array<string>, links: Array<string>, value: any } | null } | null };
+type ExpandLifeSpaceQuery = { __typename?: 'Query', sofExpandLifeSpace?: { __typename?: 'SofExpandLifeSpaceRecord', id: any, intro?: { __typename?: 'SofExpandLifeSpaceModelIntroField', blocks: Array<string>, links: Array<string>, value: any } | null, inputs: Array<{ __typename: 'SofInputDateRecord', id: any, label: string, text?: string | null, slug: string } | { __typename: 'SofInputSelectRecord', id: any, label: string, text?: string | null, slug: string, options: Array<{ __typename?: 'SofSelectOptionRecord', id: any, label: string }> } | { __typename: 'SofInputSliderRecord', id: any, label: string, text?: string | null, slug: string, min: any, max: any } | { __typename: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string }> } | null };
 
 type CreateEverydayFlowQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5774,3 +5907,5 @@ type TextInputFragment = { __typename?: 'SofInputTextRecord', id: any, label: st
 type DateInputFragment = { __typename?: 'SofInputDateRecord', id: any, label: string, text?: string | null, slug: string };
 
 type SliderInputFragment = { __typename?: 'SofInputSliderRecord', id: any, label: string, text?: string | null, slug: string, min: any, max: any };
+
+type SelectInputFragment = { __typename?: 'SofInputSelectRecord', id: any, label: string, text?: string | null, slug: string, options: Array<{ __typename?: 'SofSelectOptionRecord', id: any, label: string }> };

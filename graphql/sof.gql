@@ -161,6 +161,21 @@ query ExpandLifeSpace {
 			links
 			value
 		}
+		inputs {
+			__typename
+			... on SofInputTextRecord {
+				...TextInputFragment
+			}
+			... on SofInputSelectRecord {
+				...SelectInputFragment
+			}
+			... on SofInputSliderRecord {
+				...SliderInputFragment
+			}
+			... on SofInputDateRecord {
+				...DateInputFragment
+			}
+		}
 	}
 }
 
@@ -231,4 +246,17 @@ fragment SliderInputFragment on SofInputSliderRecord {
 	slug
 	min
 	max
+}
+
+fragment SelectInputFragment on SofInputSelectRecord {
+	id
+	label
+	text
+	slug
+	options {
+		... on SofSelectOptionRecord {
+			id
+			label
+		}
+	}
 }

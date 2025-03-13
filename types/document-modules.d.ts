@@ -28,6 +28,7 @@ export const CalmingToolingToolFragment: DocumentNode;
 export const TextInputFragment: DocumentNode;
 export const DateInputFragment: DocumentNode;
 export const SliderInputFragment: DocumentNode;
+export const SelectInputFragment: DocumentNode;
 
   export default defaultDocument;
 }
