@@ -1,3 +1,5 @@
+import 'react-native-get-random-values';
+import { nanoid } from 'nanoid';
 import {
 	PageView,
 	Loader,
@@ -12,30 +14,48 @@ import {
 import { useQuery } from '@/lib/client';
 import { ExpandLifeSpaceDocument } from '@/graphql';
 import StructuredContent from '@/components/StructuredContent';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation, useRouter, useSegments } from 'expo-router';
 import useStore from '@/lib/store';
+import SelectInput from '@/components/ui/SelectInput';
 
 export default function ExpandLifeSpace() {
 	const [data, error, loading, retry] = useQuery<ExpandLifeSpaceQuery>(ExpandLifeSpaceDocument);
 	const [section] = useSegments();
 	const router = useRouter();
+	const navigation = useNavigation();
 	const { updateData, data: storeData, resetKeys } = useStore();
 	const items = storeData.expandLifeSpaces ?? [];
 	const itemLabelSlug = 'vad-vill-jag-overvinna-exponera-mig-for';
 
-	function save() {
-		updateData({
-			expandLifeSpaces:
-				storeData.expandLifeSpaces?.filter((item: any) => item.id !== section) ?? [],
-		});
-	}
+	useEffect(() => {
+		navigation.setOptions({ headerShown: false });
+	}, [data]);
 
 	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
 
 	const { sofExpandLifeSpace } = data;
 
 	if (!sofExpandLifeSpace) return <Text>Det finns ingen data...</Text>;
+
+	const save = () => {
+		const currentItem: { [key: string]: string | number } = {
+			id: nanoid(),
+			date: new Date().toString(),
+		};
+
+		sofExpandLifeSpace?.inputs.forEach((item) => {
+			currentItem[item.slug] = storeData[section]?.[item.slug];
+		});
+
+		const expandLifeSpaces = [...items, currentItem].sort((a, b) =>
+			new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1
+		);
+
+		const resetFields = sofExpandLifeSpace?.inputs.map((item: any) => item.slug) as string[];
+		updateData(expandLifeSpaces, 'expandLifeSpaces');
+		resetKeys(resetFields, section);
+	};
 
 	return (
 		<PageView>
@@ -55,21 +75,18 @@ export default function ExpandLifeSpace() {
 						max={item.max}
 					/>
 				) : item.__typename === 'SofInputSelectRecord' ? (
-					<>hej select</>
+					<SelectInput
+						key={item.id}
+						id={item.id}
+						label={item.label}
+						slug={item.slug}
+						items={item.options.map((o) => ({ id: o.id, title: o.label }))}
+					/>
 				) : item.__typename === 'SofInputDateRecord' ? (
 					<DatePicker key={item.id} id={item.id} label={item.label} slug={item.slug} />
 				) : null
 			)}
-			<Button
-				onPress={() =>
-					resetKeys(
-						sofExpandLifeSpace.inputs.map((item) => item.slug),
-						section
-					)
-				}
-			>
-				Rensa
-			</Button>
+
 			<Spacer size='small' />
 			<Button onPress={save}>Spara</Button>
 			<Spacer />

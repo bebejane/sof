@@ -6,7 +6,7 @@ import StackHeader from '@/components/StackHeader';
 export default function Layout() {
 	const { data } = useStore();
 	const expandLifeSpaces: any[] = data.expandLifeSpaces ?? [];
-
+	console.log(expandLifeSpaces);
 	return (
 		<StackHeader>
 			{expandLifeSpaces?.map(({ id, date }, i) => (

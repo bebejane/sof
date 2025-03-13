@@ -20,7 +20,7 @@ export default function SorkItem() {
 	const { data: storeData, updateData } = useStore();
 	const expandLifeSpace = storeData.expandLifeSpaces?.find((item: any) => id === item.id);
 	const titleKey = Object.keys(expandLifeSpace ?? {}).find(
-		(key: string) => key.toLowerCase() === 'situation'
+		(key: string) => key.toLowerCase() === 'vad-vill-jag-overvinna-exponera-mig-for'
 	);
 	const title = titleKey ? expandLifeSpace?.[titleKey] : 'Ingen titel...';
 
