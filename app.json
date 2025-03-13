@@ -16,7 +16,7 @@
 				"tinted": "./assets/icons/icon-tinted.png"
 			},
 			"supportsTablet": true,
-			"bundleIdentifier": "org.kt.sof",
+			"bundleIdentifier": "org.redphalarope.sof",
 			"infoPlist": {
 				"ITSAppUsesNonExemptEncryption": false,
 				"UIBackgroundModes": ["audio"]
@@ -28,7 +28,7 @@
 				"foregroundImage": "./assets/icons/adaptive-icon.png",
 				"backgroundColor": "#015154"
 			},
-			"package": "org.kt.sof",
+			"package": "org.redphalarope.sof",
 			"versionCode": 2,
 			"permissions": ["android.permission.WAKE_LOCK"]
 		},
