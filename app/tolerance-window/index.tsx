@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Gradient from 'javascript-color-gradient';
 
 import { Picker } from '@react-native-picker/picker';
-import { StyleSheet, View, SafeAreaView } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useQuery } from '@/lib/client';
 import { ToleranceWindowDocument } from '@/graphql';
 import StructuredContent from '@/components/StructuredContent';
@@ -105,6 +105,7 @@ const s = StyleSheet.create({
 	},
 	pickerItem: {
 		fontSize: Theme.fontSize.small,
+		fontWeight: '600',
 	},
 	sliderView: {
 		flex: 1,
