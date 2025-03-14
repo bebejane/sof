@@ -29,6 +29,8 @@ export default function SelectInput({ items, slug, id, label }: Props) {
 			style={s.picker}
 			itemStyle={s.pickerItem}
 			numberOfLines={1}
+			mode='dropdown'
+			tvParallaxMagnification={1}
 			selectedValue={selected}
 			onValueChange={(itemValue, itemIndex) => setSelected(itemValue)}
 		>
@@ -47,6 +49,7 @@ const s = StyleSheet.create({
 	},
 	pickerItem: {
 		fontSize: Theme.fontSize.small,
-		fontWeight: "600",
+		fontWeight: '600',
+		borderRadius: 0,
 	},
 });

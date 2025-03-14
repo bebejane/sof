@@ -12,4 +12,3 @@ export { Image } from "./Image";
 export { Table } from './Table'
 export { List } from './List'
 export { UnorderedList } from './UnorderedList'
-export { ReadMoreContent } from './ReadMoreContent'

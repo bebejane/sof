@@ -10,8 +10,8 @@ import {
 	List,
 	Text,
 	DatePicker,
-	ReadMoreContent,
 } from '@/components/ui';
+import ReadMoreContent from '@/components/ReadMoreContent';
 import { useQuery } from '@/lib/client';
 import { ExpandLifeSpaceDocument } from '@/graphql';
 import StructuredContent from '@/components/StructuredContent';
@@ -66,7 +66,7 @@ export default function ExpandLifeSpace() {
 
 	return (
 		<PageView>
-			<ReadMoreContent>
+			<ReadMoreContent key={Math.random()}>
 				<StructuredContent content={sofExpandLifeSpace?.intro} />
 			</ReadMoreContent>
 			{sofExpandLifeSpace?.inputs.map((item) =>

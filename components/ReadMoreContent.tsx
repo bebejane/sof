@@ -12,11 +12,12 @@ import Animated, {
 
 type Props = {
 	children?: any;
+	maxHeight?: number;
 };
 
-export function ReadMoreContent({ children }: Props) {
+export default function ReadMoreContent({ children, maxHeight = 150 }: Props) {
 	const [height, setHeight] = useState<number | null>(null);
-	const heightAnimation = useSharedValue(0);
+	const heightAnimation = useSharedValue(maxHeight);
 	const [open, setOpen] = useState(false);
 	const ref = useRef<View>(null);
 
@@ -30,18 +31,16 @@ export function ReadMoreContent({ children }: Props) {
 	});
 
 	useEffect(() => {
-		setTimeout(() => {
-			height === null && ref.current?.measure((x, y, w, h, e) => setHeight(h));
-		}, 50);
-	}, []);
-
-	useEffect(() => {
-		heightAnimation.value = open && height !== null ? height : 150;
+		heightAnimation.value = open && height !== null ? height : maxHeight;
 	}, [open, height]);
 
 	return (
 		<>
-			<Animated.View ref={ref} style={[s.container, height !== null && animatedStyle]}>
+			<Animated.View
+				ref={ref}
+				style={[s.container, height !== null && animatedStyle]}
+				onLayout={(e) => setHeight(e.nativeEvent.layout.height)}
+			>
 				{children}
 			</Animated.View>
 			<LinearGradient
