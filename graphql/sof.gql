@@ -148,6 +148,7 @@ query ToleranceWindow {
 			value
 		}
 		inputs {
+			__typename
 			...TextInputFragment
 		}
 	}

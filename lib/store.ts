@@ -3,6 +3,12 @@ import { shallow } from 'zustand/shallow';
 import { persist, createJSONStorage } from 'zustand/middleware'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
+export type Tolerance = {
+  id: string,
+  date: string,
+  [key: string]: any
+}[]
+
 export type Diary = {
   id: string,
   date: string,
@@ -36,6 +42,7 @@ export interface StoreState {
     assignments: Assignments
     sorks: Sorks
     expandLifeSpaces: ExpandLifeSpaces
+    tolerance: Tolerance
     [key: string]: any
   },
   theme: 'light' | 'dark',
@@ -50,7 +57,8 @@ const defaultState = {
   steps: [],
   assignments: [],
   sorks: [],
-  expandLifeSpaces: []
+  expandLifeSpaces: [],
+  tolerance: []
 }
 
 const useStore = create(persist<StoreState>((set, get) => ({

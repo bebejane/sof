@@ -1,16 +1,20 @@
-import { Loader, TextInput, PageView, Spacer, Text, Button } from '@/components/ui';
+import 'react-native-get-random-values';
+import { nanoid } from 'nanoid';
+import { Loader, TextInput, PageView, Spacer, Text, Button, List } from '@/components/ui';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
 import Gradient from 'javascript-color-gradient';
-
-import { Picker } from '@react-native-picker/picker';
 import { StyleSheet, View } from 'react-native';
 import { useQuery } from '@/lib/client';
 import { ToleranceWindowDocument } from '@/graphql';
 import StructuredContent from '@/components/StructuredContent';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Theme from '@/styles/theme';
 import ReadMoreContent from '@/components/ReadMoreContent';
+import useStore from '@/lib/store';
+import { useRouter, useSegments } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
+import SelectInput from '@/components/ui/SelectInput';
 
 const sliderHeight = Theme.screenHeight / 2;
 const levels = [
@@ -21,12 +25,49 @@ const levels = [
 
 export default function ToleranceWindows() {
 	const [selectedTool, setSelectedTool] = useState<string | null>(null);
+	const [selectedTolerance, setSelectedTolerance] = useState<number>(0);
+	const [section] = useSegments();
+	const navigation = useNavigation();
+	const router = useRouter();
+	const { updateData, data: storeData, resetKeys } = useStore();
 	const [data, error, loading, retry] = useQuery<ToleranceWindowQuery>(ToleranceWindowDocument);
+	const items = storeData.tolerance ?? [];
+
+	useEffect(() => {
+		navigation.setOptions({ headerShown: false });
+	}, [data]);
+
 	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
 
 	const { sofToleranceWindow, allSofCalmingToolingTools: tools } = data;
+	const labelKey = sofToleranceWindow?.inputs.find(
+		(item) => item.__typename === 'SofInputTextRecord'
+	)?.slug;
 
-	function save() {}
+	const save = () => {
+		const currentItem: { [key: string]: string | number } = {
+			id: nanoid(),
+			date: new Date().toString(),
+			'tolerance-window-level': selectedTolerance,
+			label: labelKey ? storeData[section]?.[labelKey] : undefined,
+		};
+
+		if (selectedTool) {
+			currentItem['tolerance-window-tool'] = selectedTool;
+		}
+
+		sofToleranceWindow?.inputs.forEach((item) => {
+			currentItem[item.slug] = storeData[section]?.[item.slug];
+		});
+
+		const tolerance = [...items, currentItem].sort((a, b) =>
+			new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1
+		);
+
+		const resetFields = sofToleranceWindow?.inputs.map((item: any) => item.slug) as string[];
+		updateData(tolerance, 'tolerance');
+		resetKeys(resetFields, section);
+	};
 
 	return (
 		<PageView>
@@ -36,37 +77,48 @@ export default function ToleranceWindows() {
 			<Spacer size='small' />
 			<StructuredContent content={sofToleranceWindow?.introTools} />
 			<Spacer />
-			<ToleranceSlider />
+			<ToleranceSlider onValueChange={(val) => setSelectedTolerance(val)} />
 			<Spacer />
 			{sofToleranceWindow?.inputs.map((input, i) => (
 				<TextInput key={i} slug={input.slug} label={input.label} />
 			))}
 			<Spacer />
-			<Picker
-				style={s.picker}
-				itemStyle={s.pickerItem}
-				numberOfLines={1}
-				selectedValue={selectedTool}
-				onValueChange={(itemValue, itemIndex) => setSelectedTool(itemValue)}
-			>
-				{tools.map(({ id, title }) => (
-					<Picker.Item label={title} value={id} key={id} color={Theme.color.green} />
-				))}
-			</Picker>
+			<SelectInput
+				id={'tolerance-window-tool'}
+				label={'Välj ett verktyg'}
+				slug={'tolerance-window-tool'}
+				items={tools.map(({ id, title }) => ({ id, title }))}
+				onValueChange={(val) => setSelectedTool(val)}
+			/>
 			<Spacer />
 			<Button onPress={save}>Spara</Button>
+			<Spacer />
+			<List
+				onPress={(id) => router.navigate(`/tolerance-window/${id}`)}
+				title='Toleransfönster'
+				emptyText='Det finns inga inlägg...'
+				items={items?.map((item) => ({
+					id: item.id,
+					date: item.date,
+					label: item.label,
+				}))}
+			/>
 		</PageView>
 	);
 }
 
-function ToleranceSlider() {
+function ToleranceSlider({ onValueChange }: { onValueChange: (value: number) => void }) {
 	const [value, setValue] = React.useState(0);
 	const gradient = new Gradient()
-		.setColorGradient(Theme.color.black, Theme.color.green, Theme.color.red)
+		.setColorGradient(Theme.color.red, Theme.color.green, Theme.color.black)
 		.setMidpoint(21)
 		.getColors();
 
 	const thumbColor = gradient[value + 10];
+
+	useEffect(() => {
+		onValueChange(value);
+	}, [value]);
 
 	return (
 		<View style={s.sliderView}>
@@ -88,7 +140,7 @@ function ToleranceSlider() {
 				/>
 				<View style={s.sliderTrackWrap}>
 					<LinearGradient
-						colors={[Theme.color.black, Theme.color.green, Theme.color.red]}
+						colors={[Theme.color.red, Theme.color.green, Theme.color.black]}
 						start={[0, 1]}
 						end={[1, 0]}
 						style={s.sliderTrack}

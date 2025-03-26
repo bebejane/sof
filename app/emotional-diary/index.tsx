@@ -22,25 +22,6 @@ export default function EmotionalDiary() {
 		navigation.setOptions({ headerShown: false });
 	}, [data]);
 
-	const isValidItem = () => {
-		const currentItem: { [key: string]: string | number } = {};
-
-		sofEmotionalDiary?.inputs.forEach((item) => {
-			currentItem[item.slug] = storeData[section]?.[item.slug];
-		});
-
-		let valid = true;
-
-		Object.keys(currentItem).forEach((key) => {
-			if (currentItem[key] === undefined || currentItem[key] === null || currentItem[key] === '') {
-				valid = false;
-				return;
-			}
-		});
-
-		return valid;
-	};
-
 	const save = () => {
 		const currentItem: { [key: string]: string | number } = {
 			id: nanoid(),

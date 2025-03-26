@@ -83,7 +83,7 @@ export const menu: Menu = [
 	},
 	{
 		href: '/tolerance-window',
-		name: 'tolerance-window/index',
+		name: 'tolerance-window',
 		options: {
 			title: 'Toleransfönster',
 		},
