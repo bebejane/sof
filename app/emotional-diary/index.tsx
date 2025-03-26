@@ -8,6 +8,7 @@ import { EmotionalDiaryDocument } from '../../graphql';
 import useStore from '../../lib/store';
 import { useNavigation, useRouter, useSegments } from 'expo-router';
 import Theme from '@/styles/theme';
+import SelectInput from '@/components/ui/SelectInput';
 
 export default function EmotionalDiary() {
 	const [section] = useSegments();
@@ -60,13 +61,21 @@ export default function EmotionalDiary() {
 	};
 
 	if (loading || error) return <Loader loading={loading} error={error} onRetry={retry} />;
-
 	const { sofEmotionalDiary } = data;
+
 	return (
 		<PageView>
 			{sofEmotionalDiary?.inputs.map((item) =>
 				item.__typename === 'SofInputTextRecord' ? (
 					<TextInput key={item.id} slug={item.slug} label={item.label} />
+				) : item.__typename === 'SofInputSelectRecord' ? (
+					<SelectInput
+						key={item.id}
+						id={item.id}
+						label={item.label}
+						slug={item.slug}
+						items={item.options.map((o) => ({ id: o.id, title: o.label }))}
+					/>
 				) : (
 					<SliderInput
 						key={item.id}
@@ -78,9 +87,7 @@ export default function EmotionalDiary() {
 					/>
 				)
 			)}
-			<Button onPress={save} disabled={!isValidItem()}>
-				Spara
-			</Button>
+			<Button onPress={save}>Spara</Button>
 			<Spacer />
 			<List
 				onPress={(id) => router.navigate(`/emotional-diary/${id}`)}

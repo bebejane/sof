@@ -124,6 +124,9 @@ query EmotionalDiary {
 			... on SofInputTextRecord {
 				...TextInputFragment
 			}
+			... on SofInputSelectRecord {
+				...SelectInputFragment
+			}
 			... on SofInputSliderRecord {
 				...SliderInputFragment
 			}

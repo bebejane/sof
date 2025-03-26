@@ -3293,6 +3293,7 @@ type SofCalmingToolingToolModelContentBlocksField = AudioBlockRecord | ImageBloc
 type SofCalmingToolingToolModelContentField = {
   __typename?: 'SofCalmingToolingToolModelContentField';
   blocks: Array<SofCalmingToolingToolModelContentBlocksField>;
+  inlineBlocks: Array<Scalars['String']['output']>;
   links: Array<Scalars['String']['output']>;
   value: Scalars['JsonField']['output'];
 };
@@ -3374,6 +3375,7 @@ type SofCalmingToolingToolRecorddescriptionArgs = {
 type SofCreateEverydayFlowModelIntroField = {
   __typename?: 'SofCreateEverydayFlowModelIntroField';
   blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
   links: Array<Scalars['String']['output']>;
   value: Scalars['JsonField']['output'];
 };
@@ -3404,7 +3406,7 @@ type SofCreateEverydayFlowRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-type SofEmotionalDiaryModelInputsField = SofInputSliderRecord | SofInputTextRecord;
+type SofEmotionalDiaryModelInputsField = SofInputSelectRecord | SofInputSliderRecord | SofInputTextRecord;
 
 /** Record of type Enkel känslodagbok (sof) (sof_emotional_diary) */
 type SofEmotionalDiaryRecord = RecordInterface & {
@@ -3437,6 +3439,7 @@ type SofExpandLifeSpaceModelInputsField = SofInputDateRecord | SofInputSelectRec
 type SofExpandLifeSpaceModelIntroField = {
   __typename?: 'SofExpandLifeSpaceModelIntroField';
   blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
   links: Array<Scalars['String']['output']>;
   value: Scalars['JsonField']['output'];
 };
@@ -4271,6 +4274,7 @@ type SofTakeCareOfYourselfCategoryRecord_seoMetaTagsArgs = {
 type SofToleranceWindowModelIntroField = {
   __typename?: 'SofToleranceWindowModelIntroField';
   blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
   links: Array<Scalars['String']['output']>;
   value: Scalars['JsonField']['output'];
 };
@@ -4278,6 +4282,7 @@ type SofToleranceWindowModelIntroField = {
 type SofToleranceWindowModelIntroToolsField = {
   __typename?: 'SofToleranceWindowModelIntroToolsField';
   blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
   links: Array<Scalars['String']['output']>;
   value: Scalars['JsonField']['output'];
 };
@@ -5045,6 +5050,7 @@ type SovStopAndThinkToolModelContentBlocksField = AudioBlockRecord | ImageBlockR
 type SovStopAndThinkToolModelContentField = {
   __typename?: 'SovStopAndThinkToolModelContentField';
   blocks: Array<SovStopAndThinkToolModelContentBlocksField>;
+  inlineBlocks: Array<Scalars['String']['output']>;
   links: Array<Scalars['String']['output']>;
   value: Scalars['JsonField']['output'];
 };
@@ -5883,7 +5889,7 @@ type CalmingToolingToolQuery = { __typename?: 'Query', sofCalmingToolingTool?: {
 type EmotionalDiaryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type EmotionalDiaryQuery = { __typename?: 'Query', sofEmotionalDiary?: { __typename?: 'SofEmotionalDiaryRecord', id: any, inputs: Array<{ __typename: 'SofInputSliderRecord', id: any, label: string, text?: string | null, slug: string, min: any, max: any } | { __typename: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string }> } | null };
+type EmotionalDiaryQuery = { __typename?: 'Query', sofEmotionalDiary?: { __typename?: 'SofEmotionalDiaryRecord', id: any, inputs: Array<{ __typename: 'SofInputSelectRecord', id: any, label: string, text?: string | null, slug: string, options: Array<{ __typename?: 'SofSelectOptionRecord', id: any, label: string }> } | { __typename: 'SofInputSliderRecord', id: any, label: string, text?: string | null, slug: string, min: any, max: any } | { __typename: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string }> } | null };
 
 type ToleranceWindowQueryVariables = Exact<{ [key: string]: never; }>;
 

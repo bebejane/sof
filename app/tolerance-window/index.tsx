@@ -1,4 +1,4 @@
-import { Loader, TextInput, PageView, Spacer, Text } from '@/components/ui';
+import { Loader, TextInput, PageView, Spacer, Text, Button } from '@/components/ui';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
 import Gradient from 'javascript-color-gradient';
@@ -10,12 +10,13 @@ import { ToleranceWindowDocument } from '@/graphql';
 import StructuredContent from '@/components/StructuredContent';
 import React, { useState } from 'react';
 import Theme from '@/styles/theme';
+import ReadMoreContent from '@/components/ReadMoreContent';
 
 const sliderHeight = Theme.screenHeight / 2;
 const levels = [
-	{ header: 'Över', text: 'Stark rädsla, raseri' },
-	{ header: 'Mitt i', text: 'I balans, fokuserad' },
 	{ header: 'Under', text: 'Avsängd, bortdomnad' },
+	{ header: 'Mitt i', text: 'I balans, fokuserad' },
+	{ header: 'Över', text: 'Stark rädsla, raseri' },
 ];
 
 export default function ToleranceWindows() {
@@ -25,14 +26,22 @@ export default function ToleranceWindows() {
 
 	const { sofToleranceWindow, allSofCalmingToolingTools: tools } = data;
 
+	function save() {}
+
 	return (
 		<PageView>
-			<StructuredContent content={sofToleranceWindow?.intro} />
+			<ReadMoreContent>
+				<StructuredContent content={sofToleranceWindow?.intro} />
+			</ReadMoreContent>
 			<Spacer size='small' />
+			<StructuredContent content={sofToleranceWindow?.introTools} />
+			<Spacer />
+			<ToleranceSlider />
+			<Spacer />
 			{sofToleranceWindow?.inputs.map((input, i) => (
 				<TextInput key={i} slug={input.slug} label={input.label} />
 			))}
-			<StructuredContent content={sofToleranceWindow?.introTools} />
+			<Spacer />
 			<Picker
 				style={s.picker}
 				itemStyle={s.pickerItem}
@@ -45,7 +54,7 @@ export default function ToleranceWindows() {
 				))}
 			</Picker>
 			<Spacer />
-			<ToleranceSlider />
+			<Button onPress={save}>Spara</Button>
 		</PageView>
 	);
 }
@@ -53,7 +62,7 @@ export default function ToleranceWindows() {
 function ToleranceSlider() {
 	const [value, setValue] = React.useState(0);
 	const gradient = new Gradient()
-		.setColorGradient(Theme.color.red, Theme.color.green, Theme.color.black)
+		.setColorGradient(Theme.color.black, Theme.color.green, Theme.color.red)
 		.setMidpoint(21)
 		.getColors();
 
@@ -62,9 +71,9 @@ function ToleranceSlider() {
 	return (
 		<View style={s.sliderView}>
 			<View style={s.sliderValue}>
-				<Text style={s.sliderValueText}>{10}</Text>
-				<Text style={s.sliderValueText}>{0}</Text>
 				<Text style={s.sliderValueText}>{-10}</Text>
+				<Text style={[s.sliderValueText, s.sliderValueTextCenter]}>{0}</Text>
+				<Text style={s.sliderValueText}>{10}</Text>
 			</View>
 			<View style={s.sliderWrap}>
 				<Slider
@@ -79,7 +88,7 @@ function ToleranceSlider() {
 				/>
 				<View style={s.sliderTrackWrap}>
 					<LinearGradient
-						colors={[Theme.color.red, Theme.color.green, Theme.color.black]}
+						colors={[Theme.color.black, Theme.color.green, Theme.color.red]}
 						start={[0, 1]}
 						end={[1, 0]}
 						style={s.sliderTrack}
@@ -122,6 +131,9 @@ const s = StyleSheet.create({
 	sliderValueText: {
 		fontSize: Theme.fontSize.medium,
 		fontWeight: 'bold',
+	},
+	sliderValueTextCenter: {
+		marginLeft: -8,
 	},
 	sliderWrap: {
 		width: '100%',

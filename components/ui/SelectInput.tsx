@@ -1,6 +1,6 @@
 import { Picker } from '@react-native-picker/picker';
 import { StyleSheet } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Theme from '@/styles/theme';
 import { useSegments } from 'expo-router';
 import useStore from '@/lib/store';
@@ -12,17 +12,14 @@ export type Props = {
 	slug: string | undefined | null;
 };
 
-export default function SelectInput({ items, slug, id, label }: Props) {
-	const [selected, setSelected] = useState<string | null>(null);
+const deselected = { id: 'null', title: '' };
+
+export default function SelectInput({ items, slug }: Props) {
 	const [section] = useSegments();
 	const { updateData, data } = useStore();
-
-	useEffect(() => {
-		if (selected !== null) {
-			const title = items.find((item) => item.id === selected)?.title;
-			slug && updateData({ [slug]: title }, section);
-		}
-	}, [selected]);
+	const selected = slug
+		? items.find(({ title }) => title === data[section]?.[slug])?.id ?? null
+		: null;
 
 	return (
 		<Picker
@@ -32,9 +29,11 @@ export default function SelectInput({ items, slug, id, label }: Props) {
 			mode='dropdown'
 			tvParallaxMagnification={1}
 			selectedValue={selected}
-			onValueChange={(itemValue, itemIndex) => setSelected(itemValue)}
+			onValueChange={(itemValue, itemIndex) => {
+				slug && updateData({ [slug]: items[itemIndex - 1]?.title }, section);
+			}}
 		>
-			{items.map(({ id, title }) => (
+			{[deselected].concat(items).map(({ id, title }) => (
 				<Picker.Item label={title} value={id} key={id} color={Theme.color.green} />
 			))}
 		</Picker>
