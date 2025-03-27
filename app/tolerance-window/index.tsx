@@ -18,8 +18,8 @@ import SelectInput from '@/components/ui/SelectInput';
 
 const sliderHeight = Theme.screenHeight / 2;
 const levels = [
-	{ header: 'Under', text: 'Avsängd, bortdomnad' },
-	{ header: 'Mitt i', text: 'I balans, fokuserad' },
+	{ header: 'Under', text: 'Avsängd, bortdomnad, frånvarande, känns overkligt, anpassar mig' },
+	{ header: 'Mitt i', text: 'I balans, kan hantera och vara fokuserad' },
 	{ header: 'Över', text: 'Stark rädsla, raseri' },
 ];
 
@@ -220,9 +220,11 @@ const s = StyleSheet.create({
 	sliderHeader: {
 		fontWeight: 'bold',
 	},
-	sliderText: {},
+	sliderText: {
+		fontSize: Theme.fontSize.small,
+	},
 	tempSection: {
-		flexBasis: '33.3333%',
+		flexBasis: '20.3333%',
 	},
 	level: {
 		flexDirection: 'column',
