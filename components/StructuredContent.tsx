@@ -4,7 +4,7 @@ import { Paragraph, Image, TextInput, Table, UnorderedList, Header } from './ui'
 import unescape from 'lodash-es/unescape';
 import AudioPlayer from './ui/AudioPlayer';
 
-export default function StructuredContent({ content }: { content: any }) {
+export default function StructuredContent({ content, styles }: { content: any; styles?: any }) {
 	const html = render(content, {
 		renderBlock({ record, adapter: { renderNode } }) {
 			switch (record?.__typename) {
@@ -27,6 +27,7 @@ export default function StructuredContent({ content }: { content: any }) {
 	return (
 		<HTMLView
 			value={html}
+			stylesheet={styles}
 			renderNode={(node, index, children) => {
 				switch (node.name) {
 					case 'img':

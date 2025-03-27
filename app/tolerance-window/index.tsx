@@ -75,7 +75,15 @@ export default function ToleranceWindows() {
 				<StructuredContent content={sofToleranceWindow?.intro} />
 			</ReadMoreContent>
 			<Spacer size='small' />
-			<StructuredContent content={sofToleranceWindow?.introTools} />
+			<StructuredContent
+				content={sofToleranceWindow?.introTools}
+				styles={{
+					p: {
+						color: Theme.color.green,
+						fontSize: Theme.fontSize.default,
+					},
+				}}
+			/>
 			<Spacer />
 			<ToleranceSlider onValueChange={(val) => setSelectedTolerance(val)} />
 			<Spacer />
@@ -147,9 +155,12 @@ function ToleranceSlider({ onValueChange }: { onValueChange: (value: number) => 
 					/>
 				</View>
 			</View>
-			<View style={s.sliderLabel}>
-				{levels.map(({ header, text }) => (
-					<View key={header} style={s.sliderStep}>
+			<View style={s.sliderLabels}>
+				{levels.map(({ header, text }, i) => (
+					<View
+						key={header}
+						style={[s.sliderStep, i === levels.length - 1 ? s.sliderStepLast : null]}
+					>
 						<Text style={s.sliderHeader}>{header}</Text>
 						<Text style={s.sliderText}>{text}</Text>
 					</View>
@@ -206,16 +217,20 @@ const s = StyleSheet.create({
 		width: '100%',
 		height: 5,
 	},
-	sliderLabel: {
+	sliderLabels: {
 		flex: 1,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		alignItems: 'center',
+		alignItems: 'flex-start',
 	},
 	sliderStep: {
 		flex: 1,
 		width: '33.3333%',
+		paddingRight: Theme.margin / 2,
 		flexDirection: 'column',
+	},
+	sliderStepLast: {
+		paddingRight: 0,
 	},
 	sliderHeader: {
 		fontWeight: 'bold',
