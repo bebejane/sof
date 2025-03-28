@@ -15,7 +15,11 @@
 			"developmentClient": false,
 			"distribution": "internal"
 		},
-		"production": {}
+		"production": {
+			"android": {
+				"autoIncrement": true
+			}
+		}
 	},
 	"submit": {
 		"production": {}
