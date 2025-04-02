@@ -139,12 +139,12 @@ function ToleranceSlider({ onValueChange }: { onValueChange: (value: number) => 
 				<Slider
 					minimumValue={-10}
 					maximumValue={10}
-					value={0}
+					value={value}
 					step={1}
 					minimumTrackTintColor={'transparent'}
 					maximumTrackTintColor={'transparent'}
 					thumbTintColor={thumbColor}
-					onValueChange={(val) => setValue(val)}
+					onSlidingComplete={(val) => setValue(val)}
 				/>
 				<View style={s.sliderTrackWrap}>
 					<LinearGradient

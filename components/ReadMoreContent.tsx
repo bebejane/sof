@@ -2,7 +2,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { LinearGradient } from 'expo-linear-gradient';
 import Theme from '@/styles/theme';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Animated, {
 	Easing,
 	useAnimatedStyle,
@@ -39,7 +39,10 @@ export default function ReadMoreContent({ children, maxHeight = 150 }: Props) {
 			<Animated.View
 				ref={ref}
 				style={[s.container, height !== null && animatedStyle]}
-				onLayout={(e) => setHeight(e.nativeEvent.layout.height)}
+				onLayout={(e) => {
+					if (height !== null) return;
+					setHeight(e.nativeEvent.layout.height);
+				}}
 			>
 				{children}
 			</Animated.View>
