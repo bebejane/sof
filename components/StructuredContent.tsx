@@ -1,8 +1,9 @@
 import HTMLView from 'react-native-htmlview';
 import { render } from 'datocms-structured-text-to-html-string';
-import { Paragraph, Image, TextInput, Table, UnorderedList, Header } from './ui';
+import { Paragraph, Image, TextInput, Table, UnorderedList, Header, Text } from './ui';
 import unescape from 'lodash-es/unescape';
 import AudioPlayer from './ui/AudioPlayer';
+import Theme from '@/styles/theme';
 
 export default function StructuredContent({ content, styles }: { content: any; styles?: any }) {
 	const html = render(content, {
@@ -29,6 +30,7 @@ export default function StructuredContent({ content, styles }: { content: any; s
 			value={html}
 			stylesheet={styles}
 			renderNode={(node, index, children) => {
+				//console.log(node.name);
 				switch (node.name) {
 					case 'img':
 						return <Image key={index} data={JSON.parse(unescape(node.attribs.image))} />;
@@ -59,11 +61,17 @@ export default function StructuredContent({ content, styles }: { content: any; s
 							</Header>
 						);
 					case 'p':
-						if (!node.children?.[0]?.data) return undefined;
-
 						return (
 							<Paragraph key={index} markdown={false}>
-								{node.children[0].data}
+								{node.children.map((n, i) =>
+									n.name === 'strong' ? (
+										<Text key={i} style={{ fontWeight: 'bold' }}>
+											{n.children[0].data}
+										</Text>
+									) : (
+										<Text key={i}>{n.data}</Text>
+									)
+								)}
 							</Paragraph>
 						);
 					case 'table':
