@@ -10,12 +10,11 @@ export type Props = {
 	id: string;
 	label?: string | undefined | null;
 	slug: string | undefined | null;
+	deselected: string;
 	onValueChange?: (value: string | null) => void;
 };
 
-const deselected = { id: 'null', title: '' };
-
-export default function SelectInput({ items, slug, onValueChange }: Props) {
+export default function SelectInput({ items, slug, onValueChange, deselected = 'Välj' }: Props) {
 	const [section] = useSegments();
 	const { updateData, data } = useStore();
 	const selected = slug
@@ -38,7 +37,7 @@ export default function SelectInput({ items, slug, onValueChange }: Props) {
 				}
 			}}
 		>
-			{[deselected].concat(items).map(({ id, title }) => (
+			{[{ id: 'null', title: deselected }].concat(items).map(({ id, title }) => (
 				<Picker.Item label={title} value={id} key={id} color={Theme.color.green} />
 			))}
 		</Picker>

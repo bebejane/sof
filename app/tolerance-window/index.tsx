@@ -95,6 +95,7 @@ export default function ToleranceWindows() {
 				id={'tolerance-window-tool'}
 				label={'Välj ett verktyg'}
 				slug={'tolerance-window-tool'}
+				deselected={`Välj verktyg`}
 				items={tools.map(({ id, title }) => ({ id, title }))}
 				onValueChange={(val) => setSelectedTool(val)}
 			/>

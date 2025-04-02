@@ -55,6 +55,7 @@ export default function EmotionalDiary() {
 						id={item.id}
 						label={item.label}
 						slug={item.slug}
+						deselected={`Välj ${item.label}`}
 						items={item.options.map((o) => ({ id: o.id, title: o.label }))}
 					/>
 				) : (
