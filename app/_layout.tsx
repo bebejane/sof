@@ -193,6 +193,7 @@ export default function Navigation() {
 					{groups
 						.map(({ items }) => items)
 						.flat()
+						.concat([home])
 						.map(({ href, name, options }) => (
 							<Drawer.Screen
 								key={href}
