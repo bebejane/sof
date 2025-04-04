@@ -91,10 +91,6 @@ export default function ToleranceWindows() {
 			<Spacer />
 			<ToleranceSlider onValueChange={(val) => setSelectedTolerance(val)} />
 			<Spacer />
-			<Text style={s.header}>
-				Nästa gång något liknande händer, hur kan jag hjälpa mig själv att mig upp i eller ned i den
-				gröna zonen igen? Vilka lugnande verktyg kan jag använda mig av?
-			</Text>
 			<SelectInput
 				id={'tolerance-window-tool'}
 				label={'Välj ett verktyg'}
