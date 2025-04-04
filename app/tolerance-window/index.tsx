@@ -91,6 +91,9 @@ export default function ToleranceWindows() {
 			<Spacer />
 			<ToleranceSlider onValueChange={(val) => setSelectedTolerance(val)} />
 			<Spacer />
+			<Text style={s.header}>
+				Toleransfönsterskattning
+			</Text>
 			<SelectInput
 				id={'tolerance-window-tool'}
 				label={'Välj ett verktyg'}
