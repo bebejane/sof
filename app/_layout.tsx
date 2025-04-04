@@ -21,127 +21,150 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Theme from '@/styles/theme';
 import useAppReady from '../lib/hooks/useAppReady';
 
-export type Menu = { name: string; href: string; options: any }[];
+export type MenuItem = {
+	name: string;
+	href: string;
+	options: { drawerLabel?: string; title: string };
+};
 
-export const menu: Menu = [
-	{
-		href: '/',
-		name: 'index',
-		options: {
-			title: 'Samtal om Frihet',
-			drawerLabel: 'Hem',
-		},
-	},
-	{
-		href: '/my-goals',
-		name: 'my-goals/index',
-		options: {
-			title: 'Mina målsättningar',
-		},
-	},
-	{
-		href: '/take-care-of-myself',
-		name: 'take-care-of-myself/index',
-		options: {
-			title: 'Ta hand om mig',
-		},
-	},
-	{
-		href: '/home-assignment',
-		name: 'home-assignment',
-		options: {
-			title: 'Hemuppgift',
-		},
-	},
-	{
-		href: '/assess-progress',
-		name: 'assess-progress/index',
-		options: {
-			title: 'Skatta framgång',
-		},
-	},
-	{
-		href: '/calming-tooling',
-		name: 'calming-tooling',
-		options: {
-			title: 'Lugnande verktyg',
-		},
-	},
-	{
-		href: '/sound-exercises',
-		name: 'sound-exercises/index',
-		options: {
-			title: 'Ljudövningar',
-		},
-	},
-	{
-		href: '/maintenance-plan',
-		name: 'maintenance-plan/index',
-		options: {
-			title: 'Vidmakthållandeplan',
-		},
-	},
-	{
-		href: '/tolerance-window',
-		name: 'tolerance-window',
-		options: {
-			title: 'Toleransfönster',
-		},
-	},
-	{
-		href: '/create-everyday-flow',
-		name: 'create-everyday-flow/index',
-		options: {
-			title: 'Skapa vardagsflyt',
-		},
-	},
-	{
-		href: '/expand-life-space',
-		name: 'expand-life-space',
-		options: {
-			title: 'Vidga livsutrymmet',
-		},
-	},
-	{
-		href: '/sork',
-		name: 'sork',
-		options: {
-			title: 'Sork',
-		},
-	},
-	{
-		href: '/emotional-diary',
-		name: 'emotional-diary',
-		options: {
-			title: 'Enkel känslodagbok',
-		},
-	},
-].map((screen) => ({
-	...screen,
+export type Group = { id: string; title: string; items: MenuItem[]; open: boolean };
+
+const home: MenuItem = {
+	href: '/',
+	name: 'index',
 	options: {
-		...screen.options,
-		drawerLabel: screen.options.drawerLabel ?? screen.options.title,
-		popToTopOnBlur: true,
+		title: 'Samtal om Frihet',
+		drawerLabel: 'Hem',
 	},
-}));
+};
 
-const groups = [
+const groups: Group[] = [
 	{
 		id: 'my-change',
 		title: 'Min förändring',
-		items: menu.slice(1, 11),
+		items: [
+			{
+				href: '/my-goals',
+				name: 'my-goals/index',
+				options: {
+					title: 'Mina målsättningar',
+				},
+			},
+			{
+				href: '/take-care-of-myself',
+				name: 'take-care-of-myself/index',
+				options: {
+					title: 'Ta hand om mig',
+				},
+			},
+			{
+				href: '/home-assignment',
+				name: 'home-assignment',
+				options: {
+					title: 'Hemuppgift',
+				},
+			},
+			{
+				href: '/assess-progress',
+				name: 'assess-progress/index',
+				options: {
+					title: 'Skatta framgång',
+				},
+			},
+		],
+		open: true,
+	},
+	{
+		id: 'handle-myself',
+		title: 'Hantera tankar, känslor och beteenden',
+		items: [
+			{
+				href: '/calming-tooling',
+				name: 'calming-tooling',
+				options: {
+					title: 'Lugnande verktyg',
+				},
+			},
+			{
+				href: '/sound-exercises',
+				name: 'sound-exercises/index',
+				options: {
+					title: 'Ljudövningar',
+				},
+			},
+			{
+				href: '/create-everyday-flow',
+				name: 'create-everyday-flow/index',
+				options: {
+					title: 'Skapa vardagsflyt',
+				},
+			},
+			{
+				href: '/expand-life-space',
+				name: 'expand-life-space',
+				options: {
+					title: 'Vidga livsutrymmet',
+				},
+			},
+		],
 		open: true,
 	},
 	{
 		id: 'diary',
 		title: 'Dagbok mellan samtal',
-		items: menu.slice(11),
+		items: [
+			{
+				href: '/sork',
+				name: 'sork',
+				options: {
+					title: 'Sork',
+				},
+			},
+			{
+				href: '/emotional-diary',
+				name: 'emotional-diary',
+				options: {
+					title: 'Enkel känslodagbok',
+				},
+			},
+			{
+				href: '/tolerance-window',
+				name: 'tolerance-window',
+				options: {
+					title: 'Toleransfönster',
+				},
+			},
+		],
 		open: true,
 	},
-];
+	{
+		id: 'plan',
+		title: 'Dagbok mellan samtal',
+		items: [
+			{
+				href: '/maintenance-plan',
+				name: 'maintenance-plan/index',
+				options: {
+					title: 'Vidmakthållandeplan',
+				},
+			},
+		],
+		open: true,
+	},
+].map((group) => ({
+	...group,
+	items: group.items.map((screen: MenuItem) => ({
+		...screen,
+		options: {
+			...screen.options,
+			drawerLabel: screen.options.drawerLabel ?? screen.options.title,
+			popToTopOnBlur: true,
+		},
+	})),
+}));
 
 export default function Navigation() {
-	const appReady = useAppReady({ delay: 1500 });
+	useAppReady({ delay: 1500 });
 
 	return (
 		<SafeAreaProvider>
@@ -167,15 +190,18 @@ export default function Navigation() {
 						),
 					})}
 				>
-					{menu.map(({ href, name, options }) => (
-						<Drawer.Screen
-							key={href}
-							name={name}
-							options={{
-								...options,
-							}}
-						/>
-					))}
+					{groups
+						.map(({ items }) => items)
+						.flat()
+						.map(({ href, name, options }) => (
+							<Drawer.Screen
+								key={href}
+								name={name}
+								options={{
+									...options,
+								}}
+							/>
+						))}
 				</Drawer>
 			</GestureHandlerRootView>
 		</SafeAreaProvider>
@@ -183,7 +209,6 @@ export default function Navigation() {
 }
 
 export function CustomDrawerContent(props: DrawerContentComponentProps) {
-	const home = menu.find((m) => m.href === '/');
 	const router = useRouter();
 
 	return (
@@ -191,7 +216,7 @@ export function CustomDrawerContent(props: DrawerContentComponentProps) {
 			{home && (
 				<DrawerItem
 					key={'home'}
-					label={home?.options.drawerLabel}
+					label={home?.options.drawerLabel ?? home?.options.title}
 					style={s.item}
 					activeTintColor={Theme.color.green}
 					labelStyle={s.label}

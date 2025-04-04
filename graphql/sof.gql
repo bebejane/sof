@@ -215,6 +215,12 @@ fragment CalmingToolingToolFragment on SofCalmingToolingToolRecord {
 					url
 				}
 			}
+			... on VideoBlockRecord {
+				id
+				youtube {
+					url
+				}
+			}
 			... on TextInputBlockSofRecord {
 				id
 				input {

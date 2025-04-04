@@ -3288,7 +3288,7 @@ type SofCalmingToolingRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-type SofCalmingToolingToolModelContentBlocksField = AudioBlockRecord | ImageBlockRecord | TableBlockRecord | TextInputBlockSofRecord;
+type SofCalmingToolingToolModelContentBlocksField = AudioBlockRecord | ImageBlockRecord | TableBlockRecord | TextInputBlockSofRecord | VideoBlockRecord;
 
 type SofCalmingToolingToolModelContentField = {
   __typename?: 'SofCalmingToolingToolModelContentField';
@@ -5808,6 +5808,32 @@ type UploadWidthFilter = {
   neq?: InputMaybe<Scalars['IntType']['input']>;
 };
 
+/** Block of type Video (video_block) */
+type VideoBlockRecord = RecordInterface & {
+  __typename?: 'VideoBlockRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  youtube: VideoField;
+};
+
+
+/** Block of type Video (video_block) */
+type VideoBlockRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 type VideoField = {
   __typename?: 'VideoField';
   height: Scalars['IntType']['output'];
@@ -5877,14 +5903,14 @@ type MaintanencePlanQuery = { __typename?: 'Query', sofMaintanencePlan?: { __typ
 type CalmingToolingQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type CalmingToolingQuery = { __typename?: 'Query', sofCalmingTooling?: { __typename?: 'SofCalmingToolingRecord', id: any } | null, allSofCalmingToolingTools: Array<{ __typename?: 'SofCalmingToolingToolRecord', id: any, title: string, description: string, content?: { __typename?: 'SofCalmingToolingToolModelContentField', value: any, links: Array<string>, blocks: Array<{ __typename: 'AudioBlockRecord', id: any, audio: { __typename?: 'FileField', url: string } } | { __typename: 'ImageBlockRecord', id: any, image: { __typename?: 'FileField', id: any, url: string, alt?: string | null, width?: any | null, height?: any | null, video?: { __typename?: 'UploadVideoField', streamingUrl: string } | null } } | { __typename: 'TableBlockRecord', id: any, tableData?: any | null } | { __typename: 'TextInputBlockSofRecord', id: any, input?: { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string } | null }> } | null }> };
+type CalmingToolingQuery = { __typename?: 'Query', sofCalmingTooling?: { __typename?: 'SofCalmingToolingRecord', id: any } | null, allSofCalmingToolingTools: Array<{ __typename?: 'SofCalmingToolingToolRecord', id: any, title: string, description: string, content?: { __typename?: 'SofCalmingToolingToolModelContentField', value: any, links: Array<string>, blocks: Array<{ __typename: 'AudioBlockRecord', id: any, audio: { __typename?: 'FileField', url: string } } | { __typename: 'ImageBlockRecord', id: any, image: { __typename?: 'FileField', id: any, url: string, alt?: string | null, width?: any | null, height?: any | null, video?: { __typename?: 'UploadVideoField', streamingUrl: string } | null } } | { __typename: 'TableBlockRecord', id: any, tableData?: any | null } | { __typename: 'TextInputBlockSofRecord', id: any, input?: { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string } | null } | { __typename: 'VideoBlockRecord', id: any, youtube: { __typename?: 'VideoField', url: string } }> } | null }> };
 
 type CalmingToolingToolQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ItemId']['input']>;
 }>;
 
 
-type CalmingToolingToolQuery = { __typename?: 'Query', sofCalmingToolingTool?: { __typename?: 'SofCalmingToolingToolRecord', id: any, title: string, description: string, content?: { __typename?: 'SofCalmingToolingToolModelContentField', value: any, links: Array<string>, blocks: Array<{ __typename: 'AudioBlockRecord', id: any, audio: { __typename?: 'FileField', url: string } } | { __typename: 'ImageBlockRecord', id: any, image: { __typename?: 'FileField', id: any, url: string, alt?: string | null, width?: any | null, height?: any | null, video?: { __typename?: 'UploadVideoField', streamingUrl: string } | null } } | { __typename: 'TableBlockRecord', id: any, tableData?: any | null } | { __typename: 'TextInputBlockSofRecord', id: any, input?: { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string } | null }> } | null } | null };
+type CalmingToolingToolQuery = { __typename?: 'Query', sofCalmingToolingTool?: { __typename?: 'SofCalmingToolingToolRecord', id: any, title: string, description: string, content?: { __typename?: 'SofCalmingToolingToolModelContentField', value: any, links: Array<string>, blocks: Array<{ __typename: 'AudioBlockRecord', id: any, audio: { __typename?: 'FileField', url: string } } | { __typename: 'ImageBlockRecord', id: any, image: { __typename?: 'FileField', id: any, url: string, alt?: string | null, width?: any | null, height?: any | null, video?: { __typename?: 'UploadVideoField', streamingUrl: string } | null } } | { __typename: 'TableBlockRecord', id: any, tableData?: any | null } | { __typename: 'TextInputBlockSofRecord', id: any, input?: { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string } | null } | { __typename: 'VideoBlockRecord', id: any, youtube: { __typename?: 'VideoField', url: string } }> } | null } | null };
 
 type EmotionalDiaryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5894,7 +5920,7 @@ type EmotionalDiaryQuery = { __typename?: 'Query', sofEmotionalDiary?: { __typen
 type ToleranceWindowQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ToleranceWindowQuery = { __typename?: 'Query', sofToleranceWindow?: { __typename?: 'SofToleranceWindowRecord', id: any, intro?: { __typename?: 'SofToleranceWindowModelIntroField', blocks: Array<string>, links: Array<string>, value: any } | null, introTools?: { __typename?: 'SofToleranceWindowModelIntroToolsField', blocks: Array<string>, links: Array<string>, value: any } | null, inputs: Array<{ __typename: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string }> } | null, allSofCalmingToolingTools: Array<{ __typename?: 'SofCalmingToolingToolRecord', id: any, title: string, description: string, content?: { __typename?: 'SofCalmingToolingToolModelContentField', value: any, links: Array<string>, blocks: Array<{ __typename: 'AudioBlockRecord', id: any, audio: { __typename?: 'FileField', url: string } } | { __typename: 'ImageBlockRecord', id: any, image: { __typename?: 'FileField', id: any, url: string, alt?: string | null, width?: any | null, height?: any | null, video?: { __typename?: 'UploadVideoField', streamingUrl: string } | null } } | { __typename: 'TableBlockRecord', id: any, tableData?: any | null } | { __typename: 'TextInputBlockSofRecord', id: any, input?: { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string } | null }> } | null }> };
+type ToleranceWindowQuery = { __typename?: 'Query', sofToleranceWindow?: { __typename?: 'SofToleranceWindowRecord', id: any, intro?: { __typename?: 'SofToleranceWindowModelIntroField', blocks: Array<string>, links: Array<string>, value: any } | null, introTools?: { __typename?: 'SofToleranceWindowModelIntroToolsField', blocks: Array<string>, links: Array<string>, value: any } | null, inputs: Array<{ __typename: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string }> } | null, allSofCalmingToolingTools: Array<{ __typename?: 'SofCalmingToolingToolRecord', id: any, title: string, description: string, content?: { __typename?: 'SofCalmingToolingToolModelContentField', value: any, links: Array<string>, blocks: Array<{ __typename: 'AudioBlockRecord', id: any, audio: { __typename?: 'FileField', url: string } } | { __typename: 'ImageBlockRecord', id: any, image: { __typename?: 'FileField', id: any, url: string, alt?: string | null, width?: any | null, height?: any | null, video?: { __typename?: 'UploadVideoField', streamingUrl: string } | null } } | { __typename: 'TableBlockRecord', id: any, tableData?: any | null } | { __typename: 'TextInputBlockSofRecord', id: any, input?: { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string } | null } | { __typename: 'VideoBlockRecord', id: any, youtube: { __typename?: 'VideoField', url: string } }> } | null }> };
 
 type ExpandLifeSpaceQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5906,7 +5932,7 @@ type CreateEverydayFlowQueryVariables = Exact<{ [key: string]: never; }>;
 
 type CreateEverydayFlowQuery = { __typename?: 'Query', sofCreateEverydayFlow?: { __typename?: 'SofCreateEverydayFlowRecord', id: any, intro?: { __typename?: 'SofCreateEverydayFlowModelIntroField', blocks: Array<string>, links: Array<string>, value: any } | null } | null };
 
-type CalmingToolingToolFragment = { __typename?: 'SofCalmingToolingToolRecord', id: any, title: string, description: string, content?: { __typename?: 'SofCalmingToolingToolModelContentField', value: any, links: Array<string>, blocks: Array<{ __typename: 'AudioBlockRecord', id: any, audio: { __typename?: 'FileField', url: string } } | { __typename: 'ImageBlockRecord', id: any, image: { __typename?: 'FileField', id: any, url: string, alt?: string | null, width?: any | null, height?: any | null, video?: { __typename?: 'UploadVideoField', streamingUrl: string } | null } } | { __typename: 'TableBlockRecord', id: any, tableData?: any | null } | { __typename: 'TextInputBlockSofRecord', id: any, input?: { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string } | null }> } | null };
+type CalmingToolingToolFragment = { __typename?: 'SofCalmingToolingToolRecord', id: any, title: string, description: string, content?: { __typename?: 'SofCalmingToolingToolModelContentField', value: any, links: Array<string>, blocks: Array<{ __typename: 'AudioBlockRecord', id: any, audio: { __typename?: 'FileField', url: string } } | { __typename: 'ImageBlockRecord', id: any, image: { __typename?: 'FileField', id: any, url: string, alt?: string | null, width?: any | null, height?: any | null, video?: { __typename?: 'UploadVideoField', streamingUrl: string } | null } } | { __typename: 'TableBlockRecord', id: any, tableData?: any | null } | { __typename: 'TextInputBlockSofRecord', id: any, input?: { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string } | null } | { __typename: 'VideoBlockRecord', id: any, youtube: { __typename?: 'VideoField', url: string } }> } | null };
 
 type TextInputFragment = { __typename?: 'SofInputTextRecord', id: any, label: string, text?: string | null, slug: string };
 

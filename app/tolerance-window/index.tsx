@@ -1,6 +1,6 @@
 import 'react-native-get-random-values';
 import { nanoid } from 'nanoid';
-import { Loader, TextInput, PageView, Spacer, Text, Button, List } from '@/components/ui';
+import { Loader, TextInput, PageView, Spacer, Text, Button, List, Header } from '@/components/ui';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
 import Gradient from 'javascript-color-gradient';
@@ -85,12 +85,16 @@ export default function ToleranceWindows() {
 				}}
 			/>
 			<Spacer />
-			<ToleranceSlider onValueChange={(val) => setSelectedTolerance(val)} />
-			<Spacer />
 			{sofToleranceWindow?.inputs.map((input, i) => (
 				<TextInput key={i} slug={input.slug} label={input.label} />
 			))}
 			<Spacer />
+			<ToleranceSlider onValueChange={(val) => setSelectedTolerance(val)} />
+			<Spacer />
+			<Text style={s.header}>
+				Nästa gång något liknande händer, hur kan jag hjälpa mig själv att mig upp i eller ned i den
+				gröna zonen igen? Vilka lugnande verktyg kan jag använda mig av?
+			</Text>
 			<SelectInput
 				id={'tolerance-window-tool'}
 				label={'Välj ett verktyg'}
@@ -241,6 +245,13 @@ const s = StyleSheet.create({
 	},
 	tempSection: {
 		flexBasis: '20.3333%',
+	},
+	header: {
+		color: Theme.color.green,
+		fontSize: Theme.fontSize.small,
+		fontWeight: 500,
+		marginBottom: Theme.margin / 2,
+		lineHeight: Theme.lineHeight.default,
 	},
 	level: {
 		flexDirection: 'column',

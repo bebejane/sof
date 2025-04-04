@@ -4,6 +4,7 @@ import { Paragraph, Image, TextInput, Table, UnorderedList, Header, Text } from 
 import unescape from 'lodash-es/unescape';
 import AudioPlayer from './ui/AudioPlayer';
 import Theme from '@/styles/theme';
+import YoutubePlayer from '@/components/YoutubePlayer';
 
 export default function StructuredContent({ content, styles }: { content: any; styles?: any }) {
 	const html = render(content, {
@@ -14,6 +15,9 @@ export default function StructuredContent({ content, styles }: { content: any; s
 				case 'AudioBlockRecord':
 					const { url: src } = record?.audio as { url: string };
 					return renderNode('audio', { src });
+				case 'VideoBlockRecord':
+					const { url } = record?.youtube as { url: string };
+					return renderNode('video', { src: url });
 				case 'TextInputBlockSofRecord':
 					const { id, text, label, slug } = record?.input as any;
 					return renderNode('input', { id, label, text, slug });
@@ -36,6 +40,8 @@ export default function StructuredContent({ content, styles }: { content: any; s
 						return <Image key={index} data={JSON.parse(unescape(node.attribs.image))} />;
 					case 'audio':
 						return <AudioPlayer key={index} src={node.attribs.src} />;
+					case 'video':
+						return <YoutubePlayer key={index} src={node.attribs.src} />;
 					case 'input':
 						return <TextInput key={index} slug={node.attribs.slug} {...node.attribs} />;
 					case 'ul':
