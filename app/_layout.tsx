@@ -139,7 +139,7 @@ const groups: Group[] = [
 	},
 	{
 		id: 'plan',
-		title: 'Dagbok mellan samtal',
+		title: 'Plan för framtiden',
 		items: [
 			{
 				href: '/maintenance-plan',
