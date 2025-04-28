@@ -90,8 +90,7 @@ export default function ToleranceWindows() {
 					},
 				}}
 			/>
-			<Spacer />
-			<Text style={s.header}>Toleransfönsterskattning</Text>
+			<Spacer size='small' />
 			<SelectInput
 				id={'tolerance-window-tool'}
 				label={'Välj ett verktyg'}

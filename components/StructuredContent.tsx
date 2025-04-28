@@ -66,7 +66,6 @@ export default function StructuredContent({ content, styles }: { content: any; s
 							</Header>
 						);
 					case 'p':
-						console.log('paragraph', node);
 						return (
 							<Paragraph key={index} markdown={false} style={styles?.p}>
 								{node.children.map((n, i) =>
