@@ -34,7 +34,6 @@ export default function StructuredContent({ content, styles }: { content: any; s
 			value={html}
 			stylesheet={styles}
 			renderNode={(node, index, children) => {
-				//console.log(node.name);
 				switch (node.name) {
 					case 'img':
 						return <Image key={index} data={JSON.parse(unescape(node.attribs.image))} />;
@@ -67,15 +66,18 @@ export default function StructuredContent({ content, styles }: { content: any; s
 							</Header>
 						);
 					case 'p':
+						console.log('paragraph', node);
 						return (
-							<Paragraph key={index} markdown={false}>
+							<Paragraph key={index} markdown={false} style={styles?.p}>
 								{node.children.map((n, i) =>
 									n.name === 'strong' ? (
-										<Text key={i} style={{ fontWeight: 'bold' }}>
+										<Text key={i} style={{ fontWeight: 'bold', ...styles?.p }}>
 											{n.children[0].data}
 										</Text>
 									) : (
-										<Text key={i}>{n.data}</Text>
+										<Text key={i} style={{ ...styles?.p }}>
+											{n.data}
+										</Text>
 									)
 								)}
 							</Paragraph>

@@ -75,6 +75,12 @@ export default function ToleranceWindows() {
 				<StructuredContent content={sofToleranceWindow?.intro} />
 			</ReadMoreContent>
 			<Spacer size='small' />
+			{sofToleranceWindow?.inputs.map((input, i) => (
+				<TextInput key={i} slug={input.slug} label={input.label} />
+			))}
+			<Spacer />
+			<ToleranceSlider onValueChange={(val) => setSelectedTolerance(val)} />
+			<Spacer />
 			<StructuredContent
 				content={sofToleranceWindow?.introTools}
 				styles={{
@@ -85,15 +91,7 @@ export default function ToleranceWindows() {
 				}}
 			/>
 			<Spacer />
-			{sofToleranceWindow?.inputs.map((input, i) => (
-				<TextInput key={i} slug={input.slug} label={input.label} />
-			))}
-			<Spacer />
-			<ToleranceSlider onValueChange={(val) => setSelectedTolerance(val)} />
-			<Spacer />
-			<Text style={s.header}>
-				Toleransfönsterskattning
-			</Text>
+			<Text style={s.header}>Toleransfönsterskattning</Text>
 			<SelectInput
 				id={'tolerance-window-tool'}
 				label={'Välj ett verktyg'}
