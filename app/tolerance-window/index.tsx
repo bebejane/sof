@@ -18,7 +18,7 @@ import SelectInput from '@/components/ui/SelectInput';
 
 const sliderHeight = Theme.screenHeight / 2;
 const levels = [
-	{ header: 'Under', text: 'Avsängd, bortdomnad, frånvarande, känns overkligt, anpassar mig' },
+	{ header: 'Under', text: 'Avstängd, bortdomnad, frånvarande, känns overkligt, anpassar mig' },
 	{ header: 'Mitt i', text: 'I balans, kan hantera och vara fokuserad' },
 	{ header: 'Över', text: 'Stark rädsla, raseri' },
 ];
