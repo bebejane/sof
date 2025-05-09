@@ -48,7 +48,7 @@ export default function EmotionalDiary() {
 		<PageView>
 			{sofEmotionalDiary?.inputs.map((item) =>
 				item.__typename === 'SofInputTextRecord' ? (
-					<TextInput key={item.id} slug={item.slug} label={item.label} />
+					<TextInput key={item.id} slug={item.slug} title={item.label} label={item.text} />
 				) : item.__typename === 'SofInputSelectRecord' ? (
 					<SelectInput
 						key={item.id}
