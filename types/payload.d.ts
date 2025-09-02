@@ -5045,7 +5045,7 @@ type SovStopAndThinkRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-type SovStopAndThinkToolModelContentBlocksField = AudioBlockRecord | ImageBlockRecord | TableBlockRecord | TextInputBlockRecord;
+type SovStopAndThinkToolModelContentBlocksField = AudioBlockRecord | ImageBlockRecord | TableBlockRecord | TextInputBlockRecord | VideoBlockRecord;
 
 type SovStopAndThinkToolModelContentField = {
   __typename?: 'SovStopAndThinkToolModelContentField';
