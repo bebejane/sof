@@ -27,11 +27,9 @@ export default function AudioPlayer({ src }: { src: string }) {
 		soundRef.current = null;
 
 		try {
-			const { sound, status } = await Audio.Sound.createAsync(
-				{ uri: src },
-				{ isLooping: false, shouldPlay: false }
-			);
+			const { sound, status } = await Audio.Sound.createAsync({ uri: src }, { isLooping: false, shouldPlay: false });
 			soundRef.current = sound;
+			await soundRef.current?.setVolumeAsync(1.0);
 		} catch (e) {
 			console.log(e);
 			setError((e as Error).message);
@@ -76,7 +74,7 @@ export default function AudioPlayer({ src }: { src: string }) {
 			interruptionModeIOS: InterruptionModeIOS.DuckOthers,
 			interruptionModeAndroid: InterruptionModeAndroid.DuckOthers,
 			shouldDuckAndroid: true,
-			playThroughEarpieceAndroid: true,
+			playThroughEarpieceAndroid: false,
 		});
 
 		soundRef.current?.playAsync();
