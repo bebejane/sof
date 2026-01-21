@@ -128,6 +128,13 @@ const groups: Group[] = [
 				},
 			},
 			{
+				href: '/notepad',
+				name: 'notepad',
+				options: {
+					title: 'Anteckningsblocket',
+				},
+			},
+			{
 				href: '/tolerance-window',
 				name: 'tolerance-window',
 				options: {
@@ -137,6 +144,7 @@ const groups: Group[] = [
 		],
 		open: true,
 	},
+
 	{
 		id: 'plan',
 		title: 'Plan för framtiden',
