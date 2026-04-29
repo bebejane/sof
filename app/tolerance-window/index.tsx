@@ -1,6 +1,6 @@
 import 'react-native-get-random-values';
 import { nanoid } from 'nanoid';
-import { Loader, TextInput, PageView, Spacer, Text, Button, List, Header } from '@/components/ui';
+import { Loader, TextInput, PageView, Spacer, Text, Button, List } from '@/components/ui';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
 import Gradient from 'javascript-color-gradient';
@@ -41,15 +41,15 @@ export default function ToleranceWindows() {
 
 	const { sofToleranceWindow, allSofCalmingToolingTools: tools } = data;
 	const labelKey = sofToleranceWindow?.inputs.find(
-		(item) => item.__typename === 'SofInputTextRecord'
+		(item) => item.__typename === 'SofInputTextRecord',
 	)?.slug;
 
 	const save = () => {
 		const currentItem: { [key: string]: string | number } = {
-			id: nanoid(),
-			date: new Date().toString(),
+			'id': nanoid(),
+			'date': new Date().toString(),
 			'tolerance-window-level': selectedTolerance,
-			label: labelKey ? storeData[section]?.[labelKey] : undefined,
+			'label': labelKey ? storeData[section]?.[labelKey] : undefined,
 		};
 
 		if (selectedTool) {
@@ -61,7 +61,7 @@ export default function ToleranceWindows() {
 		});
 
 		const tolerance = [...items, currentItem].sort((a, b) =>
-			new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1
+			new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1,
 		);
 
 		const resetFields = sofToleranceWindow?.inputs.map((item: any) => item.slug) as string[];
