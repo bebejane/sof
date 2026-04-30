@@ -1,11 +1,11 @@
 {
   "files.exclude": {
-    ".expo": true,
-    ".tmp": true,
-    ".vscode": true,
-    "node_modules": true,
-    "android": true,
-    "ios": true,
-    "expo-env.d.ts": true
+    ".expo": false,
+    ".tmp": false,
+    ".vscode": false,
+    "node_modules": false,
+    "android": false,
+    "ios": false,
+    "expo-env.d.ts": false
   },
 }
