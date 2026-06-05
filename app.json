@@ -43,7 +43,9 @@
 				"expo-audio",
 				{
 					"enableBackgroundPlayback": true,
-					"enableBackgroundRecording": false
+					"enableBackgroundRecording": false,
+					"microphonePermission": "your purpose string here",
+					"recordAudioAndroid": false
 				}
 			],
 			"expo-router",

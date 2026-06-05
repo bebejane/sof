@@ -8,6 +8,7 @@ import YoutubePlayer from '@/components/YoutubePlayer';
 export default function StructuredContent({ content, styles }: { content: any; styles?: any }) {
 	const html = render(content, {
 		renderBlock({ record, adapter: { renderNode } }) {
+			console.log(record?.__typename);
 			switch (record?.__typename) {
 				case 'ImageBlockRecord':
 					return renderNode('img', { image: JSON.stringify(record?.image) });
@@ -18,6 +19,7 @@ export default function StructuredContent({ content, styles }: { content: any; s
 				case 'VideoBlockRecord':
 					const { url } = record?.youtube as { url: string };
 					return renderNode('video', { src: url });
+				case 'TextInputBlockSofRecord':
 				case 'TextInputBlockRecord':
 					const { id, text, label, slug } = record?.input as any;
 					return renderNode('input', { id, label, text, slug });

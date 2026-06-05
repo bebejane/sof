@@ -29,7 +29,8 @@ export default function AudioPlayer({ src, title }: { src: string; title: string
 	}, [status?.playbackState]);
 
 	const play = async () => {
-		setLoading(true);
+		// setLoading(true);
+		setPlaying(true);
 		setError(null);
 
 		try {
@@ -47,6 +48,7 @@ export default function AudioPlayer({ src, title }: { src: string; title: string
 
 			player.play();
 		} catch (e) {
+			setPlaying(false);
 			setError((e as Error).message);
 		}
 		setLoading(false);
