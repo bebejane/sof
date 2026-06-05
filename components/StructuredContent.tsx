@@ -8,7 +8,6 @@ import YoutubePlayer from '@/components/YoutubePlayer';
 export default function StructuredContent({ content, styles }: { content: any; styles?: any }) {
 	const html = render(content, {
 		renderBlock({ record, adapter: { renderNode } }) {
-			console.log(record?.__typename);
 			switch (record?.__typename) {
 				case 'ImageBlockRecord':
 					return renderNode('img', { image: JSON.stringify(record?.image) });
